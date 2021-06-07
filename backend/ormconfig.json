@@ -1,0 +1,15 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "11111111",
+  "database": "vet-clinic",
+  "entities": ["dist/clinic/entities/*.entity{.ts,.js}"],
+  "migrationsTableName": "migrations",
+  "migrations": ["migration/*.js"],
+  "cli": {
+    "migrationsDir": "migration"
+  },
+  "synchronize": true
+}
