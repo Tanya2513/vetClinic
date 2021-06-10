@@ -6,6 +6,9 @@ import {
   Link
 } from "react-router-dom";
 import CreatePatient from "./CreatePatient";
+import List from "./List";
+import CardPatient from "./CardPatient";
+
 
 function App() {
   return (
@@ -17,10 +20,10 @@ function App() {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="/about">About</Link>
+                <Link to="/list">Список пациентов</Link>
               </li>
               <li>
-                <Link to="/users">Users</Link>
+                <Link to="/patient/create">Добавить нового пациента</Link>
               </li>
             </ul>
           </nav>
@@ -34,9 +37,13 @@ function App() {
             <Route path="/patient/create">
               <CreatePatient />
             </Route>
-            {/*<Route path="/list">*/}
-            {/*  <List />*/}
-            {/*</Route>*/}
+
+            <Route path="/patient/:id">
+              <CardPatient />
+            </Route>
+            <Route path="/list">
+              <List />
+            </Route>
             {/*<Route path="/">*/}
             {/*  <Home />*/}
             {/*</Route>*/}

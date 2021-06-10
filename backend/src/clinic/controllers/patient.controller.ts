@@ -26,13 +26,13 @@ export class PatientController {
   }
 
   @Get()
-  findAll(@Query() query: listPatientDTO) {
-    return `This action returns all Patients (perPage: ${query.perPage} items)`;
+  async getList(@Query() query: listPatientDTO) {
+    return await this.clinicService.getList(query);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return `This action returns a #${id} Patient`;
+  async findOne(@Param('id') id: string) {
+    return await this.clinicService.findOne(id);
   }
 
   @Put(':id')

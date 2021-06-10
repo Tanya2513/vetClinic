@@ -13,6 +13,4 @@ export class Patient {
 
   @Column()
   species: string;
-
-
 }

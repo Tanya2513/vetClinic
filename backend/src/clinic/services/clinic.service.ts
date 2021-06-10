@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Patient } from '../entities/patient.entity';
 import { CreatePatientDto } from '../dto/create-patient.dto';
+import { listPatientDTO } from '../dto/list-patient.dto';
 
 @Injectable()
 export class ClinicService {
@@ -11,12 +12,12 @@ export class ClinicService {
     private patientRepository: Repository<Patient>,
   ) {}
 
-  async findAll(): Promise<Patient[]> {
-    return await this.patientRepository.find();
-  }
+  // async findAll(): Promise<Patient[]> {
+  //   return await this.patientRepository.find();
+  // }
 
-  findOne(id: string): Promise<Patient> {
-    return this.patientRepository.findOne(id);
+  async findOne(id: string): Promise<Patient> {
+    return await this.patientRepository.findOne(id);
   }
 
   async remove(id: string): Promise<void> {
@@ -27,8 +28,8 @@ export class ClinicService {
     return 'Hello World!';
   }
 
-  getList(): any {
-    return { a: 1, b: 2 };
+  async getList(query: listPatientDTO): Promise<Patient[]> {
+    return await this.patientRepository.find();
   }
 
   async create(createPatientDto: CreatePatientDto): Promise<Patient> {
