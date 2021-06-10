@@ -6,14 +6,13 @@ export class Patient {
   id: number;
 
   @Column()
-  firstName: string;
+  name: string;
 
   @Column()
-  midName: string;
+  age: string;
 
   @Column()
-  lastName: string;
+  species: string;
 
-  @Column({ default: true })
-  isActive: boolean;
+
 }
