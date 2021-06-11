@@ -13,4 +13,10 @@ export class Patient {
 
   @Column()
   species: string;
+
+  @Column()
+  diagnosis: string;
+
+  @Column()
+  date: string;
 }

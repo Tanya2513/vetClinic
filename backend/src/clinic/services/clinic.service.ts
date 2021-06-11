@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import {DeleteResult, Repository} from 'typeorm';
 import { Patient } from '../entities/patient.entity';
 import { CreatePatientDto } from '../dto/create-patient.dto';
 import { listPatientDTO } from '../dto/list-patient.dto';
@@ -20,8 +20,8 @@ export class ClinicService {
     return await this.patientRepository.findOne(id);
   }
 
-  async remove(id: string): Promise<void> {
-    await this.patientRepository.delete(id);
+  async remove(id: string): Promise<DeleteResult> {
+    return await this.patientRepository.delete(id);
   }
 
   getHello(): string {
@@ -37,6 +37,8 @@ export class ClinicService {
     patient.name = createPatientDto.name;
     patient.age = createPatientDto.age;
     patient.species = createPatientDto.species;
+    patient.diagnosis = createPatientDto.diagnosis;
+    patient.date = createPatientDto.date;
     return await this.patientRepository.save(patient);
   }
 }

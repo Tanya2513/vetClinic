@@ -12,6 +12,7 @@ import { ClinicService } from '../services/clinic.service';
 import { CreatePatientDto } from '../dto/create-patient.dto';
 import { listPatientDTO } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
+import { DeleteResult } from 'typeorm';
 
 @Controller('patient')
 export class PatientController {
@@ -41,7 +42,16 @@ export class PatientController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return `This action removes a #${id} Patient`;
+  async remove(@Param('id') id: string) {
+    const deleteResult = await this.clinicService.remove(id);
+    if (deleteResult.affected == 1) {
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+      };
+    }
   }
 }
