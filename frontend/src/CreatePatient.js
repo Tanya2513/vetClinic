@@ -1,5 +1,6 @@
 import {useState} from "react";
 import Input from "./form/Input";
+import {useHistory} from "react-router-dom";
 
 function CreatePatient() {
     const [name, setName] = useState('');
@@ -7,6 +8,7 @@ function CreatePatient() {
     const [species, setSpecies] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
     const [date, setDate] = useState('');
+    const {push} = useHistory();
 
     function save() {
         const formData = new FormData();
@@ -24,7 +26,17 @@ function CreatePatient() {
         return fetch('http://localhost:5000/patient/', {
             method: 'POST',
             body: data,
-        }).then(response => response.json())
+        }).then(async function(response) {
+            const responseObject = await response.json();
+            if (responseObject.success == true){
+                alert("Добавлено карту")
+                push('/list/');
+
+            } else {
+                alert("Ошибка")
+            }
+        })
+
     }
 
 

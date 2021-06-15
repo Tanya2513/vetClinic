@@ -27,7 +27,7 @@ function CardPatient() {
 
         return fetch('http://localhost:5000/patient/' + id, {
             method: 'DELETE',
-        }).then(async(response) => {
+        }).then(async function (response)  {
           const responseObject = await response.json();
             if (responseObject.success == true){
                 alert("Удалено карту")

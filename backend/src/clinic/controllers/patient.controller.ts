@@ -13,6 +13,7 @@ import { CreatePatientDto } from '../dto/create-patient.dto';
 import { listPatientDTO } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
 import { DeleteResult } from 'typeorm';
+import {Patient} from "../entities/patient.entity";
 
 @Controller('patient')
 export class PatientController {
@@ -22,8 +23,16 @@ export class PatientController {
   //Функция асинхронная
   async create(@Body() createPatientDto: CreatePatientDto) {
     //Нужно подождать пока создастся перед тем как вывести created
-    await this.clinicService.create(createPatientDto);
-    return 'created';
+    const patient = await this.clinicService.create(createPatientDto);
+    if (patient instanceof Patient) {
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+      };
+    }
   }
 
   @Get()

@@ -18,7 +18,7 @@ function List() {
     return (
         <div>
             {list.map(function (item) {
-                return <ListItem item={item}/>;
+                return <ListItem item={item} key={item.id}/>;
             })}
         </div>
     );
