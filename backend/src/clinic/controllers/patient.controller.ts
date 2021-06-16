@@ -12,7 +12,6 @@ import { ClinicService } from '../services/clinic.service';
 import { CreatePatientDto } from '../dto/create-patient.dto';
 import { listPatientDTO } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
-import { DeleteResult } from 'typeorm';
 import {Patient} from "../entities/patient.entity";
 
 @Controller('patient')
@@ -46,8 +45,17 @@ export class PatientController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updatePatientDto: UpdatePatientDto) {
-    return `This action updates a #${id} Patient`;
+  async update(@Param('id') id: string, @Body() updatePatientDto: UpdatePatientDto) {
+    const patient = await this.clinicService.update(updatePatientDto);
+    if (patient instanceof Patient) {
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+      };
+    }
   }
 
   @Delete(':id')

@@ -39,6 +39,10 @@ function CardPatient() {
         })
     }
 
+    function editCard(){
+        push('/edit/' + id);
+    }
+
     return (
        <div>
            <div>
@@ -50,6 +54,9 @@ function CardPatient() {
            </div>
            <button onClick={deleteCard}>
                Удалить карту
+           </button>
+           <button onClick={editCard}>
+               Редактировать карту
            </button>
        </div>
 

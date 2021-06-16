@@ -8,7 +8,7 @@ import {
 import CreatePatient from "./CreatePatient";
 import List from "./List";
 import CardPatient from "./CardPatient";
-
+import EditPatient from "./EditPatient";
 
 function App() {
   return (
@@ -44,9 +44,9 @@ function App() {
             <Route path="/list">
               <List />
             </Route>
-            {/*<Route path="/">*/}
-            {/*  <Home />*/}
-            {/*</Route>*/}
+            <Route path="/edit/:id">
+              <EditPatient />
+            </Route>
           </Switch>
         </div>
       </Router>
