@@ -5,10 +5,10 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import CreatePatient from "./CreatePatient";
-import List from "./List";
-import CardPatient from "./CardPatient";
-import EditPatient from "./EditPatient";
+import CreatePatient from "./patients/CreatePatient";
+import List from "./patients/List";
+import CardPatient from "./patients/CardPatient";
+import EditPatient from "./patients/EditPatient";
 
 function App() {
   return (

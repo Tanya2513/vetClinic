@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import Input from "./form/Input";
+import Input from "../form/Input";
 import {useHistory, useParams} from "react-router-dom";
 
 //компонент

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import Input from "./form/Input";
+import Input from "../form/Input";
 import {useHistory} from "react-router-dom";
 
 function CreatePatient() {
