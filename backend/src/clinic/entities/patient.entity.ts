@@ -18,5 +18,5 @@ export class Patient {
   diagnosis: string;
 
   @Column()
-  date: string;
+  visitDate: string;
 }

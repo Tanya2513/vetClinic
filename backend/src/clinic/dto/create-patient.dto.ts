@@ -3,5 +3,5 @@ export class CreatePatientDto {
   age: string;
   species: string;
   diagnosis: string;
-  date: string;
+  visitDate: string;
 }

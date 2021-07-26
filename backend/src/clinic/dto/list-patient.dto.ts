@@ -1,5 +1,6 @@
-export class listPatientDTO {
-  search: string;
-  page: number;
-  perPage: number;
+export class ListPatientDto {
+  name?: string;
+  species?: string;
+  age?: string;
+  visitDate?: string;
 }

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Patient } from '../entities/patient.entity';
 import { CreatePatientDto } from '../dto/create-patient.dto';
-import { listPatientDTO } from '../dto/list-patient.dto';
+import { ListPatientDto } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
 
 @Injectable()
@@ -29,9 +29,31 @@ export class ClinicService {
     return 'Hello World!';
   }
 
-  async getList(query: listPatientDTO): Promise<Patient[]> {
-    return await this.patientRepository.find();
+  async getList(query: ListPatientDto): Promise<Patient[]> {
+    // console.log('condition', condition);
+    // return await this.patientRepository.find({
+    //   where: [condition],
+    // });
+
+    const queryBuilder = this.patientRepository
+      .createQueryBuilder('patient')
+      .orderBy('patient.id', 'DESC');
+
+    query.name &&
+      queryBuilder.where('patient.name like :name', {
+        name: '%' + query.name + '%',
+      });
+
+    query.species &&
+      queryBuilder.where('patient.species = :species', {
+        species: query.species,
+      });
+
+    console.log('Database query', queryBuilder.getQuery());
+
+    return await queryBuilder.getMany();
   }
+
 
   async create(createPatientDto: CreatePatientDto): Promise<Patient> {
     const patient = new Patient();
@@ -39,7 +61,7 @@ export class ClinicService {
     patient.age = createPatientDto.age;
     patient.species = createPatientDto.species;
     patient.diagnosis = createPatientDto.diagnosis;
-    patient.date = createPatientDto.date;
+    patient.visitDate = createPatientDto.visitDate;
     return await this.patientRepository.save(patient);
   }
 
@@ -49,7 +71,7 @@ export class ClinicService {
     patient.age = updatePatientDto.age;
     patient.species = updatePatientDto.species;
     patient.diagnosis = updatePatientDto.diagnosis;
-    patient.date = updatePatientDto.date;
+    patient.visitDate = updatePatientDto.visitDate;
     return await this.patientRepository.save(patient);
   }
 }

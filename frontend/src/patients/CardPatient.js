@@ -14,7 +14,7 @@ function CardPatient() {
         age: "",
         species: "",
         diagnosis: "",
-        date: "",
+        visitDate: "",
     });
 
     useEffect(() => {
@@ -50,7 +50,7 @@ function CardPatient() {
            {patient.age}
            {patient.species}
            {patient.diagnosis}
-           {patient.date}
+           {patient.visitDate}
            </div>
            <button onClick={deleteCard}>
                Удалить карту

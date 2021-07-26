@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Species } from '../entities/species.entity';
 import { CreateSpeciesDto } from '../dto/create-species.dto';
-import { listSpeciesDto } from '../dto/list-species.dto';
+import { ListSpeciesDto } from '../dto/list-species.dto';
 import { UpdateSpeciesDto } from '../dto/update-species.dto';
 
 @Injectable()
@@ -29,7 +29,7 @@ export class SpeciesService {
     return 'Hello World!';
   }
 
-  async getList(query: listSpeciesDto): Promise<Species[]> {
+  async getList(query: ListSpeciesDto): Promise<Species[]> {
     return await this.speciesRepository.find();
   }
 

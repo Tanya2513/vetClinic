@@ -10,9 +10,9 @@ import {
 } from '@nestjs/common';
 import { ClinicService } from '../services/clinic.service';
 import { CreatePatientDto } from '../dto/create-patient.dto';
-import { listPatientDTO } from '../dto/list-patient.dto';
+import { ListPatientDto } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
-import {Patient} from "../entities/patient.entity";
+import { Patient } from '../entities/patient.entity';
 
 @Controller('patient')
 export class PatientController {
@@ -35,7 +35,7 @@ export class PatientController {
   }
 
   @Get()
-  async getList(@Query() query: listPatientDTO) {
+  async getList(@Query() query: ListPatientDto) {
     return await this.clinicService.getList(query);
   }
 
@@ -45,7 +45,10 @@ export class PatientController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: string, @Body() updatePatientDto: UpdatePatientDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updatePatientDto: UpdatePatientDto,
+  ) {
     const patient = await this.clinicService.update(updatePatientDto);
     if (patient instanceof Patient) {
       return {

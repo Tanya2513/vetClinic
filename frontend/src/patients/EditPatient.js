@@ -12,7 +12,7 @@ function EditPatient() {
     const [age, setAge] = useState('');
     const [species, setSpecies] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
-    const [date, setDate] = useState('');
+    const [visitDate, setVisitDate] = useState('');
 
 
     const {push} = useHistory();
@@ -25,7 +25,7 @@ function EditPatient() {
              setAge(responseObject.age);
              setSpecies(responseObject.species);
              setDiagnosis(responseObject.diagnosis);
-             setDate(responseObject.date);
+             setVisitDate(responseObject.visitDate);
         })
     }, [id]);
 
@@ -35,7 +35,7 @@ function EditPatient() {
         formData.append('age', age);
         formData.append('species', species);
         formData.append('diagnosis', diagnosis);
-        formData.append('date', date);
+        formData.append('visitDate', visitDate);
         formData.append('id', id);
 
         const data = new URLSearchParams();
@@ -67,7 +67,7 @@ function EditPatient() {
                 <Input type="text" name="age" value={age} placeholder={"вік"} setter={setAge}/>
                 <Input type="text" name="species" value={species} placeholder={"вид"} setter={setSpecies}/>
                 <Input type="text" name="diagnosis" value={diagnosis} placeholder={"діагноз"} setter={setDiagnosis}/>
-                <Input type="text" name="date" value={date} placeholder={"дата"} setter={setDate}/>
+                <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
                 <button type={"button"} onClick={save}>Зберегти</button>
             </form>
         </div>

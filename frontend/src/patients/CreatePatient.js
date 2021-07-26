@@ -7,7 +7,7 @@ function CreatePatient() {
     const [age, setAge] = useState('');
     const [species, setSpecies] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
-    const [date, setDate] = useState('');
+    const [visitDate, setVisitDate] = useState('');
     const {push} = useHistory();
 
     function save() {
@@ -16,7 +16,7 @@ function CreatePatient() {
         formData.append('age', age);
         formData.append('species', species);
         formData.append('diagnosis', diagnosis);
-        formData.append('date', date);
+        formData.append('visitDate', visitDate);
 
         const data = new URLSearchParams();
         for (const pair of formData) {
@@ -47,7 +47,7 @@ function CreatePatient() {
                 <Input type="text" name="age" placeholder={"вік"} setter={setAge}/>
                 <Input type="text" name="species" placeholder={"вид"} setter={setSpecies}/>
                 <Input type="text" name="diagnosis" placeholder={"діагноз"} setter={setDiagnosis}/>
-                <Input type="text" name="date" placeholder={"дата"} setter={setDate}/>
+                <Input type="text" name="visitDate" placeholder={"дата"} setter={setVisitDate}/>
                 <button type={"button"} onClick={save}>Зберегти</button>
             </form>
         </div>

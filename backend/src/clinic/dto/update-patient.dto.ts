@@ -4,5 +4,5 @@ export class UpdatePatientDto {
   age: string;
   species: string;
   diagnosis: string;
-  date: string;
+  visitDate: string;
 }

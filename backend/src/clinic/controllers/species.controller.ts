@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { SpeciesService } from '../services/species.service';
 import { CreateSpeciesDto } from '../dto/create-species.dto';
-import { listSpeciesDto } from '../dto/list-species.dto';
+import { ListSpeciesDto } from '../dto/list-species.dto';
 import { UpdateSpeciesDto } from '../dto/update-species.dto';
 import { Species } from '../entities/species.entity';
 
@@ -35,7 +35,7 @@ export class SpeciesController {
   }
 
   @Get()
-  async getList(@Query() query: listSpeciesDto) {
+  async getList(@Query() query: ListSpeciesDto) {
     return await this.speciesService.getList(query);
   }
 
