@@ -7,7 +7,7 @@ import { ListPatientDto } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
 
 @Injectable()
-export class ClinicService {
+export class PatientService {
   constructor(
     @InjectRepository(Patient)
     private patientRepository: Repository<Patient>,
@@ -54,14 +54,15 @@ export class ClinicService {
     return await queryBuilder.getMany();
   }
 
-
   async create(createPatientDto: CreatePatientDto): Promise<Patient> {
-    const patient = new Patient();
-    patient.name = createPatientDto.name;
-    patient.age = createPatientDto.age;
-    patient.species = createPatientDto.species;
+    const patient = new Patient(
+      createPatientDto.name,
+      createPatientDto.age,
+      createPatientDto.species,
+      createPatientDto.visitDate,
+    );
     patient.diagnosis = createPatientDto.diagnosis;
-    patient.visitDate = createPatientDto.visitDate;
+
     return await this.patientRepository.save(patient);
   }
 

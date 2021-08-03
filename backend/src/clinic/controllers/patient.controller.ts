@@ -8,7 +8,7 @@ import {
   Query,
   Param,
 } from '@nestjs/common';
-import { ClinicService } from '../services/clinic.service';
+import { PatientService } from '../services/patient.service';
 import { CreatePatientDto } from '../dto/create-patient.dto';
 import { ListPatientDto } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
@@ -16,13 +16,13 @@ import { Patient } from '../entities/patient.entity';
 
 @Controller('patient')
 export class PatientController {
-  constructor(private readonly clinicService: ClinicService) {}
+  constructor(private readonly patientService: PatientService) {}
 
   @Post()
   //Функция асинхронная
   async create(@Body() createPatientDto: CreatePatientDto) {
     //Нужно подождать пока создастся перед тем как вывести created
-    const patient = await this.clinicService.create(createPatientDto);
+    const patient = await this.patientService.create(createPatientDto);
     if (patient instanceof Patient) {
       return {
         success: true,
@@ -36,12 +36,12 @@ export class PatientController {
 
   @Get()
   async getList(@Query() query: ListPatientDto) {
-    return await this.clinicService.getList(query);
+    return await this.patientService.getList(query);
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.clinicService.findOne(id);
+    return await this.patientService.findOne(id);
   }
 
   @Put(':id')
@@ -49,7 +49,7 @@ export class PatientController {
     @Param('id') id: string,
     @Body() updatePatientDto: UpdatePatientDto,
   ) {
-    const patient = await this.clinicService.update(updatePatientDto);
+    const patient = await this.patientService.update(updatePatientDto);
     if (patient instanceof Patient) {
       return {
         success: true,
@@ -63,8 +63,17 @@ export class PatientController {
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    const deleteResult = await this.clinicService.remove(id);
+    let patient = await this.patientService.findOne(id);
+    if (!patient) {
+      return {
+        success: false,
+        error: 'Patient not found',
+      };
+    }
+
+    const deleteResult = await this.patientService.remove(id);
     if (deleteResult.affected == 1) {
+      patient = null; //удаляем обьект
       return {
         success: true,
       };

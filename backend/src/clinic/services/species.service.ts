@@ -34,10 +34,12 @@ export class SpeciesService {
   }
 
   async create(createSpeciesDto: CreateSpeciesDto): Promise<Species> {
-    const species = new Species();
-    species.type = createSpeciesDto.type;
-    species.description = createSpeciesDto.description;
+    const species = new Species(
+      createSpeciesDto.type,
+      createSpeciesDto.description,
+    );
     species.features = createSpeciesDto.features;
+
     return await this.speciesRepository.save(species);
   }
 

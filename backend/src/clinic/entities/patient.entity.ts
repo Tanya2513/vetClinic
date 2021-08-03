@@ -2,6 +2,13 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Patient {
+  constructor(name: string, age: string, species: string, visitDate: string) {
+    this.name = name;
+    this.age = age;
+    this.species = species;
+    this.visitDate = visitDate;
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 
