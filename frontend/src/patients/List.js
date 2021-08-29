@@ -30,6 +30,23 @@ function List() {
         })
     }
 
+const[speciesList, setSpeciesList]=useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/species').then(async (response) => {
+            let answer = await response.json()
+            setSpeciesList(answer);
+        })
+    }, [])
+
+
+    function itemToOption(item){
+        console.log(item);
+        return <option value={item.id} key={item.id}>{item.type}</option>;
+    }
+
+    let optionList = speciesList.map(itemToOption);
+
     return (
         <div>
             <div>
@@ -37,7 +54,12 @@ function List() {
                 <br/>
                 <form>
                     <Input type="text" name="name" value={name} placeholder={"ім'я"} setter={setName}/>
-                    <Input type="text" name="age" value={age} placeholder={"вік"} setter={setAge}/>
+                    <p>
+                        <select name="species" size="1" >
+                            {optionList}
+                        </select>
+                        <Input type="text" name="age" value={age} placeholder={"вік"} setter={setAge}/>
+                    </p>
                     <Input type="text" name="species" value={species} placeholder={"вид"} setter={setSpecies}/>
                     <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
                     <button type={"button"} onClick={search}>Шукати!</button>
