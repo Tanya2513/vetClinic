@@ -1,11 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Species} from "./species.entity";
 
 @Entity()
 export class Patient {
-  constructor(name: string, age: string, species: string, visitDate: string) {
+  constructor(name: string, age: string, speciesId: number, visitDate: string) {
     this.name = name;
     this.age = age;
-    this.species = species;
+    this.speciesId = speciesId;
     this.visitDate = visitDate;
   }
 
@@ -19,7 +20,7 @@ export class Patient {
   age: string;
 
   @Column()
-  species: string;
+  speciesId: number;
 
   @Column()
   diagnosis: string;

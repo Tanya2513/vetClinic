@@ -30,8 +30,11 @@ export class SpeciesService {
   }
 
   async getList(query: ListSpeciesDto): Promise<Species[]> {
-    return await this.speciesRepository.find();
+    let result1 = await this.speciesRepository.find();
+    console.log(result1);
+    return result1;
   }
+
 
   async create(createSpeciesDto: CreateSpeciesDto): Promise<Species> {
     const species = new Species(

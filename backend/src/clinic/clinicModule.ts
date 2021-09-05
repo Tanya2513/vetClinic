@@ -15,7 +15,11 @@ import { SpeciesController } from './controllers/species.controller';
     TypeOrmModule.forFeature([Species]),
     TypeOrmModule.forRoot({ autoLoadEntities: true }),
   ],
-  controllers: [AppController, PatientController, SpeciesController],
+  controllers: [
+    AppController,
+    PatientController,
+    SpeciesController,
+  ],
   providers: [PatientService, SpeciesService],
 })
 export class ClinicModule {

@@ -9,7 +9,6 @@ import CreatePatient from "./patients/CreatePatient";
 import List from "./patients/List";
 import CardPatient from "./patients/CardPatient";
 import EditPatient from "./patients/EditPatient";
-
 import CreateSpecies from "./species/CreateSpecies";
 import ListSpecies from "./species/ListSpecies";
 import CardSpecies from "./species/CardSpecies";

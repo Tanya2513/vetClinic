@@ -45,8 +45,8 @@ export class PatientService {
       });
 
     query.species &&
-      queryBuilder.where('patient.species = :species', {
-        species: query.species,
+      queryBuilder.where('patient.speciesId = :speciesId', {
+        speciesId: query.species,
       });
 
     console.log('Database query', queryBuilder.getQuery());
@@ -58,7 +58,7 @@ export class PatientService {
     const patient = new Patient(
       createPatientDto.name,
       createPatientDto.age,
-      createPatientDto.species,
+      createPatientDto.speciesId,
       createPatientDto.visitDate,
     );
     patient.diagnosis = createPatientDto.diagnosis;
@@ -70,7 +70,7 @@ export class PatientService {
     const patient = await this.patientRepository.findOne(updatePatientDto.id);
     patient.name = updatePatientDto.name;
     patient.age = updatePatientDto.age;
-    patient.species = updatePatientDto.species;
+    patient.speciesId = updatePatientDto.speciesId;
     patient.diagnosis = updatePatientDto.diagnosis;
     patient.visitDate = updatePatientDto.visitDate;
     return await this.patientRepository.save(patient);
