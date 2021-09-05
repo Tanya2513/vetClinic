@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import {Species} from "./species.entity";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Species } from './species.entity';
 
 @Entity()
 export class Patient {
@@ -27,4 +27,7 @@ export class Patient {
 
   @Column()
   visitDate: string;
+
+  @ManyToOne((type) => Species, (species) => species.patient)
+  species: Species;
 }

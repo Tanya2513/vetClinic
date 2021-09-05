@@ -37,7 +37,8 @@ export class PatientService {
 
     const queryBuilder = this.patientRepository
       .createQueryBuilder('patient')
-      .orderBy('patient.id', 'DESC');
+      .orderBy('patient.id', 'DESC')
+      .leftJoinAndSelect('patient.species', 'species');
 
     query.name &&
       queryBuilder.where('patient.name like :name', {

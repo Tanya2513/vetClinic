@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { Patient } from './patient.entity';
 
 @Entity()
 export class Species {
@@ -18,4 +25,7 @@ export class Species {
 
   @Column()
   features: string;
+
+  @OneToMany((type) => Patient, (patient) => patient.species)
+  patient: Patient[];
 }

@@ -58,9 +58,8 @@ const[speciesList, setSpeciesList]=useState([]);
                         <select name="species" size="1" >
                             {optionList}
                         </select>
-                        <Input type="text" name="age" value={age} placeholder={"вік"} setter={setAge}/>
                     </p>
-                    <Input type="text" name="species" value={species} placeholder={"вид"} setter={setSpecies}/>
+                    <Input type="text" name="age" value={age} placeholder={"вік"} setter={setAge}/>
                     <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
                     <button type={"button"} onClick={search}>Шукати!</button>
 
