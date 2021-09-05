@@ -45,9 +45,9 @@ export class PatientService {
         name: '%' + query.name + '%',
       });
 
-    query.species &&
+    query.speciesId &&
       queryBuilder.where('patient.speciesId = :speciesId', {
-        speciesId: query.species,
+        speciesId: query.speciesId,
       });
 
     console.log('Database query', queryBuilder.getQuery());

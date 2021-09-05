@@ -1,6 +1,6 @@
 export class ListPatientDto {
   name?: string;
-  species?: string;
+  speciesId?: string;
   age?: string;
   visitDate?: string;
 }

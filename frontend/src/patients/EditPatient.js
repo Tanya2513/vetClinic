@@ -10,7 +10,7 @@ function EditPatient() {
     //мы деструктуризируем их и даем названия name, setName
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
-    const [species, setSpecies] = useState('');
+    const [speciesId, setSpeciesId] = useState(null);
     const [diagnosis, setDiagnosis] = useState('');
     const [visitDate, setVisitDate] = useState('');
 
@@ -23,7 +23,7 @@ function EditPatient() {
              const responseObject = await response.json();
              setName(responseObject.name);
              setAge(responseObject.age);
-             setSpecies(responseObject.species);
+             setSpeciesId(responseObject.species);
              setDiagnosis(responseObject.diagnosis);
              setVisitDate(responseObject.visitDate);
         })
@@ -33,7 +33,7 @@ function EditPatient() {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('age', age);
-        formData.append('species', species);
+        formData.append('speciesId', speciesId);
         formData.append('diagnosis', diagnosis);
         formData.append('visitDate', visitDate);
         formData.append('id', id);
@@ -59,13 +59,35 @@ function EditPatient() {
 
     }
 
+    const[speciesList, setSpeciesList]=useState([]);
 
+    useEffect(() => {
+        fetch('http://localhost:5000/species').then(async (response) => {
+            let answer = await response.json()
+            setSpeciesList(answer);
+        })
+    }, [])
+
+    function optionChange(event){
+        setSpeciesId(event.target.value);
+    }
+
+    function itemToOption(item){
+        console.log(item);
+        return <option value={item.id} key={item.id}>{item.type}</option>;
+    }
+
+    let optionList = speciesList.map(itemToOption);
     return (
         <div>
             <form>
                 <Input type="text" name="name" value={name} placeholder={"ім'я"} setter={setName}/>
                 <Input type="text" name="age" value={age} placeholder={"вік"} setter={setAge}/>
-                <Input type="text" name="species" value={species} placeholder={"вид"} setter={setSpecies}/>
+                <p>
+                    <select onChange={optionChange} name="speciesId" size="1" >
+                        {optionList}
+                    </select>
+                </p>
                 <Input type="text" name="diagnosis" value={diagnosis} placeholder={"діагноз"} setter={setDiagnosis}/>
                 <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
                 <button type={"button"} onClick={save}>Зберегти</button>

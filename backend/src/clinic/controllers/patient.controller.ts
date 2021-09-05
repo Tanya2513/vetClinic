@@ -36,6 +36,7 @@ export class PatientController {
 
   @Get()
   async getList(@Query() query: ListPatientDto) {
+    console.log('query', query);
     return await this.patientService.getList(query);
   }
 
