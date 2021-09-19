@@ -4,7 +4,7 @@ import {useHistory} from "react-router-dom";
 
 function CreatePatient() {
     const [name, setName] = useState('');
-    const [age, setAge] = useState('');
+    const [birthDate, setBirthDate] = useState('');
     const [speciesId, setSpeciesId] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
     const [visitDate, setVisitDate] = useState('');
@@ -13,7 +13,7 @@ function CreatePatient() {
     function save() {
         const formData = new FormData();
         formData.append('name', name);
-        formData.append('age', age);
+        formData.append('birthDate', birthDate);
         formData.append('speciesId', speciesId);
         formData.append('diagnosis', diagnosis);
         formData.append('visitDate', visitDate);
@@ -44,6 +44,8 @@ function CreatePatient() {
         fetch('http://localhost:5000/species').then(async (response) => {
             let answer = await response.json()
             setSpeciesList(answer);
+            let firstElement = answer[0];
+            setSpeciesId(firstElement.id);
         })
     }, [])
 
@@ -63,7 +65,7 @@ function CreatePatient() {
         <div>
             <form>
                 <Input type="text" name="name" placeholder={"ім'я"} setter={setName}/>
-                <Input type="text" name="age" placeholder={"вік"} setter={setAge}/>
+                <Input type="date" name="birthDate" placeholder={"дата народження"} setter={setBirthDate}/>
                 <p>
                     <select onChange={optionChange} name="speciesId" size="1" >
                         {optionList}

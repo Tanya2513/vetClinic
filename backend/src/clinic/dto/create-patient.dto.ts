@@ -1,6 +1,6 @@
 export class CreatePatientDto {
   name: string;
-  age: string;
+  birthDate: string;
   speciesId: number;
   diagnosis: string;
   visitDate: string;

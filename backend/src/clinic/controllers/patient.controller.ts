@@ -7,14 +7,20 @@ import {
   Body,
   Query,
   Param,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { PatientService } from '../services/patient.service';
 import { CreatePatientDto } from '../dto/create-patient.dto';
 import { ListPatientDto } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
 import { Patient } from '../entities/patient.entity';
+import { HospitalizePatientDto } from '../dto/hospitalize-patient.dto';
+import { HospitalizedPatient } from '../entities/hospitalizedPatient.entity';
+import { DischargePatientDto } from '../dto/discharge-patient.dto';
 
 @Controller('patient')
+@UseInterceptors(ClassSerializerInterceptor)
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
 
@@ -52,6 +58,41 @@ export class PatientController {
   ) {
     const patient = await this.patientService.update(updatePatientDto);
     if (patient instanceof Patient) {
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+      };
+    }
+  }
+
+  @Put('hospitalize')
+  async hospitalize(@Body() hospitalizePatientDto: HospitalizePatientDto) {
+    const hospitalizedPatient = await this.patientService.hospitalizedPatient(
+      hospitalizePatientDto.id,
+      hospitalizePatientDto.dateIn,
+      hospitalizePatientDto.room,
+    );
+    if (hospitalizedPatient instanceof HospitalizedPatient) {
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+      };
+    }
+  }
+
+  @Put('discharge')
+  async discharge(@Body() dischargePatientDto: DischargePatientDto) {
+    const dischargePatient = await this.patientService.discharge(
+      dischargePatientDto.id,
+      dischargePatientDto.dateOut,
+    );
+    if (dischargePatient instanceof HospitalizedPatient) {
       return {
         success: true,
       };

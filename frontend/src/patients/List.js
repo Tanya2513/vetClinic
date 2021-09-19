@@ -2,30 +2,41 @@ import {useEffect, useState} from "react";
 import ListItem from './ListItem';
 import Input from "../form/Input";
 
-function List() {
+function List({dateNow}) {
 
     //https://ru.reactjs.org/docs/hooks-reference.html#usestate
     //состояния
     const [list, setList] = useState([]);
     const [name, setName] = useState('');
-    const [age, setAge] = useState('');
+    const [birthDate, setBirthDate] = useState('');
     const [speciesId, setSpeciesId] = useState('');
     const [visitDate, setVisitDate] = useState('');
 
+    console.log('dateNow', dateNow);
     //https://ru.reactjs.org/docs/hooks-reference.html#useeffect
-    //выполнится при загрузке, потому что пустой deps
     useEffect(() => {
         fetch('http://localhost:5000/patient').then(async (response) => {
             setList(await response.json());
         })
-    }, [])
+    }, [dateNow])
 
 
     function search() {
-        var url = new URL('http://localhost:5000/patient'),
-            params = {name, speciesId, age, visitDate}
+        let url = new URL('http://localhost:5000/patient');
+        let filterId = speciesId;
+        if(filterId === "все"){
+            filterId = null
+        };
+        const params = {
+                name,
+                speciesId: filterId,
+                birthDate,
+                visitDate
+        }
         Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-        fetch(url.toString()).then(async (response) => {
+        const urlString = url.toString();
+        console.log('urlString', urlString);
+        fetch(urlString).then(async (response) => {
             setList(await response.json());
         })
     }
@@ -64,7 +75,7 @@ const[speciesList, setSpeciesList]=useState([]);
                             {optionList}
                         </select>
                     </p>
-                    <Input type="text" name="age" value={age} placeholder={"вік"} setter={setAge}/>
+                    <Input type="text" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
                     <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
                     <button type={"button"} onClick={search}>Шукати!</button>
                 </form>

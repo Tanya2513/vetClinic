@@ -4,13 +4,11 @@ import {useHistory, useParams} from "react-router-dom";
 
 //компонент
 function EditPatient() {
-    const state = useState('');
-
     //вызывается useState с initialValue, возвращает масив из 2х елементов
     //мы деструктуризируем их и даем названия name, setName
     const [name, setName] = useState('');
-    const [age, setAge] = useState('');
-    const [speciesId, setSpeciesId] = useState(null);
+    const [birthDate, setBirthDate] = useState('');
+    const [speciesId, setSpeciesId] = useState(undefined);
     const [diagnosis, setDiagnosis] = useState('');
     const [visitDate, setVisitDate] = useState('');
 
@@ -22,8 +20,8 @@ function EditPatient() {
         fetch('http://localhost:5000/patient/' + id).then(async (response) => {
              const responseObject = await response.json();
              setName(responseObject.name);
-             setAge(responseObject.age);
-             setSpeciesId(responseObject.species);
+             setBirthDate(responseObject.birthDate);
+             setSpeciesId(responseObject.speciesId);
              setDiagnosis(responseObject.diagnosis);
              setVisitDate(responseObject.visitDate);
         })
@@ -32,7 +30,7 @@ function EditPatient() {
     function save() {
         const formData = new FormData();
         formData.append('name', name);
-        formData.append('age', age);
+        formData.append('birthDate', birthDate);
         formData.append('speciesId', speciesId);
         formData.append('diagnosis', diagnosis);
         formData.append('visitDate', visitDate);
@@ -73,7 +71,6 @@ function EditPatient() {
     }
 
     function itemToOption(item){
-        console.log(item);
         return <option value={item.id} key={item.id}>{item.type}</option>;
     }
 
@@ -82,9 +79,9 @@ function EditPatient() {
         <div>
             <form>
                 <Input type="text" name="name" value={name} placeholder={"ім'я"} setter={setName}/>
-                <Input type="text" name="age" value={age} placeholder={"вік"} setter={setAge}/>
+                <Input type="text" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
                 <p>
-                    <select onChange={optionChange} name="speciesId" size="1" >
+                    <select onChange={optionChange} name="speciesId" size="1" value={speciesId}>
                         {optionList}
                     </select>
                 </p>

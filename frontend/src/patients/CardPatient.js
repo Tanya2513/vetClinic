@@ -11,7 +11,7 @@ function CardPatient() {
     const {push} = useHistory();
     const [patient, setPatient] = useState({
         name: "",
-        age: "",
+        birthDate: "",
         species: "",
         diagnosis: "",
         visitDate: "",
@@ -47,7 +47,7 @@ function CardPatient() {
        <div>
            <div>
            {patient.name}
-           {patient.age}
+           {patient.birthDate}
            {patient.species}
            {patient.diagnosis}
            {patient.visitDate}

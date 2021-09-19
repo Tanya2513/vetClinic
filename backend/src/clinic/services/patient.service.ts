@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Patient } from '../entities/patient.entity';
+import { HospitalizedPatient } from '../entities/hospitalizedPatient.entity';
 import { CreatePatientDto } from '../dto/create-patient.dto';
 import { ListPatientDto } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
@@ -11,6 +12,7 @@ export class PatientService {
   constructor(
     @InjectRepository(Patient)
     private patientRepository: Repository<Patient>,
+    private hospitalizedPatientRepository: Repository<HospitalizedPatient>,
   ) {}
 
   // async findAll(): Promise<Patient[]> {
@@ -45,8 +47,8 @@ export class PatientService {
         name: '%' + query.name + '%',
       });
 
-    query.speciesId &&
-      queryBuilder.where('patient.speciesId = :speciesId', {
+    !isNaN(Number.parseInt(query.speciesId)) &&
+      queryBuilder.andWhere('patient.speciesId = :speciesId', {
         speciesId: query.speciesId,
       });
 
@@ -58,7 +60,7 @@ export class PatientService {
   async create(createPatientDto: CreatePatientDto): Promise<Patient> {
     const patient = new Patient(
       createPatientDto.name,
-      createPatientDto.age,
+      createPatientDto.birthDate,
       createPatientDto.speciesId,
       createPatientDto.visitDate,
     );
@@ -70,10 +72,28 @@ export class PatientService {
   async update(updatePatientDto: UpdatePatientDto): Promise<Patient> {
     const patient = await this.patientRepository.findOne(updatePatientDto.id);
     patient.name = updatePatientDto.name;
-    patient.age = updatePatientDto.age;
+    patient.birthDate = updatePatientDto.birthDate;
     patient.speciesId = updatePatientDto.speciesId;
     patient.diagnosis = updatePatientDto.diagnosis;
     patient.visitDate = updatePatientDto.visitDate;
     return await this.patientRepository.save(patient);
+  }
+
+  async hospitalizedPatient(
+    id: number,
+    dateIn: string,
+    room: number,
+  ): Promise<Patient> {
+    const hospitalizedPatient =
+      await this.hospitalizedPatientRepository.findOne(id);
+    hospitalizedPatient.hospitalize(dateIn, room);
+    return await this.hospitalizedPatientRepository.save(hospitalizedPatient);
+  }
+
+  async discharge(id: number, dateOut: string): Promise<Patient> {
+    const hospitalizedPatient =
+      await this.hospitalizedPatientRepository.findOne(id);
+    hospitalizedPatient.discharge(dateOut);
+    return await this.hospitalizedPatientRepository.save(hospitalizedPatient);
   }
 }
