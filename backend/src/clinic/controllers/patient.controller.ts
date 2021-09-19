@@ -15,8 +15,8 @@ import { CreatePatientDto } from '../dto/create-patient.dto';
 import { ListPatientDto } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
 import { Patient } from '../entities/patient.entity';
-import { HospitalizePatientDto } from '../dto/hospitalize-patient.dto';
 import { HospitalizedPatient } from '../entities/hospitalizedPatient.entity';
+import { HospitalizePatientDto } from '../dto/hospitalize-patient.dto';
 import { DischargePatientDto } from '../dto/discharge-patient.dto';
 
 @Controller('patient')

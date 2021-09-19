@@ -5,6 +5,7 @@ import { SpeciesService } from './services/species.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { Patient } from './entities/patient.entity';
+import { HospitalizedPatient } from './entities/hospitalizedPatient.entity';
 import { Species } from './entities/species.entity';
 import { PatientController } from './controllers/patient.controller';
 import { SpeciesController } from './controllers/species.controller';
@@ -12,14 +13,11 @@ import { SpeciesController } from './controllers/species.controller';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Patient]),
+    TypeOrmModule.forFeature([HospitalizedPatient]),
     TypeOrmModule.forFeature([Species]),
     TypeOrmModule.forRoot({ autoLoadEntities: true }),
   ],
-  controllers: [
-    AppController,
-    PatientController,
-    SpeciesController,
-  ],
+  controllers: [AppController, PatientController, SpeciesController],
   providers: [PatientService, SpeciesService],
 })
 export class ClinicModule {

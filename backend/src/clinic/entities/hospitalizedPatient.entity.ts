@@ -1,6 +1,5 @@
 import { Entity, Column } from 'typeorm';
 import { Patient } from './patient.entity';
-import { config } from 'rxjs';
 
 @Entity({ name: 'patient' })
 export class HospitalizedPatient extends Patient {
