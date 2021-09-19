@@ -51,23 +51,6 @@ export class PatientController {
     return await this.patientService.findOne(id);
   }
 
-  @Put(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updatePatientDto: UpdatePatientDto,
-  ) {
-    const patient = await this.patientService.update(updatePatientDto);
-    if (patient instanceof Patient) {
-      return {
-        success: true,
-      };
-    } else {
-      return {
-        success: false,
-      };
-    }
-  }
-
   @Put('hospitalize')
   async hospitalize(@Body() hospitalizePatientDto: HospitalizePatientDto) {
     const hospitalizedPatient = await this.patientService.hospitalizedPatient(
@@ -75,6 +58,7 @@ export class PatientController {
       hospitalizePatientDto.dateIn,
       hospitalizePatientDto.room,
     );
+
     if (hospitalizedPatient instanceof HospitalizedPatient) {
       return {
         success: true,
@@ -93,6 +77,23 @@ export class PatientController {
       dischargePatientDto.dateOut,
     );
     if (dischargePatient instanceof HospitalizedPatient) {
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+      };
+    }
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updatePatientDto: UpdatePatientDto,
+  ) {
+    const patient = await this.patientService.update(updatePatientDto);
+    if (patient instanceof Patient) {
       return {
         success: true,
       };

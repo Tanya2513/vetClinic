@@ -43,6 +43,15 @@ function CardPatient() {
         push('/edit/' + id);
     }
 
+    function hospitalizePatient(){
+        push('/hospitalize/' + id);
+    }
+
+    function dischargePatient(){
+        push('/discharge/' + id)
+    }
+
+
     return (
        <div>
            <div>
@@ -57,6 +66,12 @@ function CardPatient() {
            </button>
            <button onClick={editCard}>
                Редактировать карту
+           </button>
+           <button onClick={hospitalizePatient}>
+               Госпитализировать
+           </button>
+           <button onClick={dischargePatient}>
+               Выписка пациента
            </button>
        </div>
 

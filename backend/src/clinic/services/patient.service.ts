@@ -87,6 +87,8 @@ export class PatientService {
   ): Promise<Patient> {
     const hospitalizedPatient =
       await this.hospitalizedPatientRepository.findOne(id);
+
+    console.log('hospitalizedPatient', hospitalizedPatient);
     hospitalizedPatient.hospitalize(dateIn, room);
     return await this.hospitalizedPatientRepository.save(hospitalizedPatient);
   }

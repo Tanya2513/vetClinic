@@ -9,11 +9,13 @@ import CreatePatient from "./patients/CreatePatient";
 import List from "./patients/List";
 import CardPatient from "./patients/CardPatient";
 import EditPatient from "./patients/EditPatient";
+import Hospitalize from "./patients/Hospitalize";
 import CreateSpecies from "./species/CreateSpecies";
 import ListSpecies from "./species/ListSpecies";
 import CardSpecies from "./species/CardSpecies";
 import EditSpecies from "./species/EditSpecies";
 import {useState} from "react";
+import Discharge from "./patients/Discharge";
 
 
 function App() {
@@ -77,6 +79,12 @@ function App() {
                     </Route>
                     <Route path="/editSpecies/:id">
                         <EditSpecies/>
+                    </Route>
+                    <Route path="/hospitalize/:id">
+                        <Hospitalize/>
+                    </Route>
+                    <Route path="/discharge/:id">
+                        <Discharge/>
                     </Route>
                 </Switch>
             </div>
