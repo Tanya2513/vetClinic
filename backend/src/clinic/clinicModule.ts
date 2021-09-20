@@ -9,9 +9,13 @@ import { HospitalizedPatient } from './entities/hospitalizedPatient.entity';
 import { Species } from './entities/species.entity';
 import { PatientController } from './controllers/patient.controller';
 import { SpeciesController } from './controllers/species.controller';
+import { UsersModule } from '../users/users.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
+    UsersModule,
+    AuthModule,
     TypeOrmModule.forFeature([Patient]),
     TypeOrmModule.forFeature([HospitalizedPatient]),
     TypeOrmModule.forFeature([Species]),

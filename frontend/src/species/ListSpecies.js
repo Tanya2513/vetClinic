@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import ListItemSpecies from './ListItemSpecies';
+import fetcher from "../fetcher";
 
 function ListSpecies() {
 
@@ -11,9 +12,8 @@ function ListSpecies() {
     //https://ru.reactjs.org/docs/hooks-reference.html#useeffect
     //выполнится при загрузке, потому что пустой deps
     useEffect(() => {
-        fetch('http://localhost:5000/species').then(async (response) => {
-            let answer =await response.json()
-            setListSpecies(answer);
+        fetcher('http://localhost:5000/species').then(async (response) => {
+            setListSpecies(response);
         })
     }, [])
 

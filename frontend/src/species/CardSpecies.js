@@ -3,6 +3,7 @@ import {
     useHistory
 } from "react-router-dom";
 import {useEffect, useState} from "react";
+import fetcher from "../fetcher";
 
 function CardSpecies() {
     let { id } = useParams();
@@ -16,17 +17,16 @@ function CardSpecies() {
     });
 
     useEffect(() => {
-        fetch('http://localhost:5000/species/'+ id).then(async (response) => {
-            setSpecies(await response.json());
+        fetcher('http://localhost:5000/species/'+ id).then(async (response) => {
+            setSpecies(response);
         })
     }, [id])
 
     function deleteCard(){
 
-        return fetch('http://localhost:5000/species/' + id, {
+        return fetcher('http://localhost:5000/species/' + id, {
             method: 'DELETE',
-        }).then(async function (response)  {
-          const responseObject = await response.json();
+        }).then(async function (responseObject)  {
             if (responseObject.success == true){
                 alert("Удалено карту")
                 push('/list/');

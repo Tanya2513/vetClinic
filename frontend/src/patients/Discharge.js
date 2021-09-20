@@ -1,6 +1,7 @@
 import Input from "../form/Input";
 import {useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
+import fetcher from "../fetcher";
 
 function DischargePatient(){
     let { id } = useParams();
@@ -20,11 +21,10 @@ function DischargePatient(){
             data.append(pair[0], pair[1]);
         }
 
-        return fetch('http://localhost:5000/patient/discharge', {
+        return fetcher('http://localhost:5000/patient/discharge', {
             method: 'PUT',
             body: data,
-        }).then(async function(response) {
-            const responseObject = await response.json();
+        }).then(async function(responseObject) {
             if (responseObject.success == true){
                 alert("Информация добавлена")
                 push('/patient/' + id);

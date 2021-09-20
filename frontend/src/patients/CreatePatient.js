@@ -1,6 +1,7 @@
 import {useState,useEffect} from "react";
 import Input from "../form/Input";
 import {useHistory} from "react-router-dom";
+import fetcher from "../fetcher";
 
 function CreatePatient() {
     const [name, setName] = useState('');
@@ -41,8 +42,7 @@ function CreatePatient() {
     const[speciesList, setSpeciesList]=useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/species').then(async (response) => {
-            let answer = await response.json()
+        fetcher('http://localhost:5000/species').then(async (answer) => {
             setSpeciesList(answer);
             let firstElement = answer[0];
             setSpeciesId(firstElement.id);

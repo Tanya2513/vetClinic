@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Input from "../form/Input";
 import {useHistory, useParams} from "react-router-dom";
+import fetcher from "../fetcher";
 
 //компонент
 function EditPatient() {
@@ -41,11 +42,10 @@ function EditPatient() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetch('http://localhost:5000/patient/' + id, {
+        return fetcher('http://localhost:5000/patient/' + id, {
             method: 'PUT',
             body: data,
-        }).then(async function (response) {
-            const responseObject = await response.json();
+        }).then(async function (responseObject) {
             if (responseObject.success == true) {
                 alert("Изменения внесены")
                 push('/patient/' + id);

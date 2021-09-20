@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
 import ListItem from './ListItem';
 import Input from "../form/Input";
+import fetcher from "../fetcher";
 
 function List({dateNow}) {
-
+    
     //https://ru.reactjs.org/docs/hooks-reference.html#usestate
     //состояния
     const [list, setList] = useState([]);
@@ -15,8 +16,8 @@ function List({dateNow}) {
     console.log('dateNow', dateNow);
     //https://ru.reactjs.org/docs/hooks-reference.html#useeffect
     useEffect(() => {
-        fetch('http://localhost:5000/patient').then(async (response) => {
-            setList(await response.json());
+        fetcher('http://localhost:5000/patient').then(async (response) => {
+            setList(await response);
         })
     }, [dateNow])
 
@@ -36,16 +37,15 @@ function List({dateNow}) {
         Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
         const urlString = url.toString();
         console.log('urlString', urlString);
-        fetch(urlString).then(async (response) => {
-            setList(await response.json());
+        fetcher(urlString).then((response) => {
+            setList(response);
         })
     }
 
 const[speciesList, setSpeciesList]=useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/species').then(async (response) => {
-            let answer = await response.json()
+        fetcher('http://localhost:5000/species').then(async (answer) => {
             answer.unshift({type: "все", description: "", id: null, features: ""});
             setSpeciesList(answer);
         })
@@ -60,7 +60,6 @@ const[speciesList, setSpeciesList]=useState([]);
         console.log(item);
         return <option value={item.id} key={item.id}>{item.type}</option>;
     }
-    console.log("11",speciesId);
     let optionList = speciesList.map(itemToOption);
 
     return (

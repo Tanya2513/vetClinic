@@ -16,6 +16,7 @@ import CardSpecies from "./species/CardSpecies";
 import EditSpecies from "./species/EditSpecies";
 import {useState} from "react";
 import Discharge from "./patients/Discharge";
+import Login from "./auth/Login";
 
 
 function App() {
@@ -85,6 +86,9 @@ function App() {
                     </Route>
                     <Route path="/discharge/:id">
                         <Discharge/>
+                    </Route>
+                    <Route path="/login">
+                        <Login/>
                     </Route>
                 </Switch>
             </div>

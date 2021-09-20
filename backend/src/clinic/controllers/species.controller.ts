@@ -7,14 +7,17 @@ import {
   Body,
   Query,
   Param,
+  UseGuards,
 } from '@nestjs/common';
 import { SpeciesService } from '../services/species.service';
 import { CreateSpeciesDto } from '../dto/create-species.dto';
 import { ListSpeciesDto } from '../dto/list-species.dto';
 import { UpdateSpeciesDto } from '../dto/update-species.dto';
 import { Species } from '../entities/species.entity';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
 @Controller('species')
+@UseGuards(JwtAuthGuard)
 export class SpeciesController {
   constructor(private readonly speciesService: SpeciesService) {}
 

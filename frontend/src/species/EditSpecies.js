@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Input from "../form/Input";
 import {useHistory, useParams} from "react-router-dom";
+import fetcher from "../fetcher";
 
 //компонент
 function EditSpecies() {
@@ -17,8 +18,7 @@ function EditSpecies() {
     let { id } = useParams();
 
     useEffect(() => {
-        fetch('http://localhost:5000/species/' + id).then(async (response) => {
-             const responseObject = await response.json();
+        fetcher('http://localhost:5000/species/' + id).then(async (responseObject) => {
              setType(responseObject.type);
              setDescription(responseObject.description);
              setFeatures(responseObject.features);
@@ -36,11 +36,10 @@ function EditSpecies() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetch('http://localhost:5000/species/' + id, {
+        return fetcher('http://localhost:5000/species/' + id, {
             method: 'PUT',
             body: data,
-        }).then(async function (response) {
-            const responseObject = await response.json();
+        }).then(async function (responseObject) {
             if (responseObject.success == true) {
                 alert("Изменения внесены")
                 push('/species/' + id);

@@ -3,6 +3,7 @@ import {
     useHistory
 } from "react-router-dom";
 import {useEffect, useState} from "react";
+import fetcher from "../fetcher";
 
 function CardPatient() {
     let { id } = useParams();
@@ -25,7 +26,7 @@ function CardPatient() {
 
     function deleteCard(){
 
-        return fetch('http://localhost:5000/patient/' + id, {
+        return fetcher('http://localhost:5000/patient/' + id, {
             method: 'DELETE',
         }).then(async function (response)  {
           const responseObject = await response.json();

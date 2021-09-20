@@ -9,6 +9,7 @@ import {
   Param,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
 } from '@nestjs/common';
 import { PatientService } from '../services/patient.service';
 import { CreatePatientDto } from '../dto/create-patient.dto';
@@ -18,9 +19,11 @@ import { Patient } from '../entities/patient.entity';
 import { HospitalizedPatient } from '../entities/hospitalizedPatient.entity';
 import { HospitalizePatientDto } from '../dto/hospitalize-patient.dto';
 import { DischargePatientDto } from '../dto/discharge-patient.dto';
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 
 @Controller('patient')
 @UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(JwtAuthGuard)
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
 

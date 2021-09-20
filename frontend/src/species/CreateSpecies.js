@@ -1,6 +1,7 @@
 import {useState} from "react";
 import Input from "../form/Input";
 import {useHistory} from "react-router-dom";
+import fetcher from "../fetcher";
 
 function CreateSpecies() {
     const [type, setType] = useState('');
@@ -19,11 +20,10 @@ function CreateSpecies() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetch('http://localhost:5000/species/', {
+        return fetcher('http://localhost:5000/species/', {
             method: 'POST',
             body: data,
-        }).then(async function(response) {
-            const responseObject = await response.json();
+        }).then(async function(responseObject) {
             if (responseObject.success == true){
                 alert("Добавлено карту")
                 push('/list_species/');
