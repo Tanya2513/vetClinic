@@ -18,8 +18,8 @@ function EditPatient() {
     let { id } = useParams();
 
     useEffect(() => {
-        fetch('http://localhost:5000/patient/' + id).then(async (response) => {
-             const responseObject = await response.json();
+        fetcher('http://localhost:5000/patient/' + id).then(async (response) => {
+             const responseObject = response;
              setName(responseObject.name);
              setBirthDate(responseObject.birthDate);
              setSpeciesId(responseObject.speciesId);
@@ -46,7 +46,7 @@ function EditPatient() {
             method: 'PUT',
             body: data,
         }).then(async function (responseObject) {
-            if (responseObject.success == true) {
+            if (responseObject.success === true) {
                 alert("Изменения внесены")
                 push('/patient/' + id);
 
@@ -57,12 +57,12 @@ function EditPatient() {
 
     }
 
+
     const[speciesList, setSpeciesList]=useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/species').then(async (response) => {
-            let answer = await response.json()
-            setSpeciesList(answer);
+        fetcher('http://localhost:5000/species').then(async (response) => {
+            setSpeciesList(response);
         })
     }, [])
 

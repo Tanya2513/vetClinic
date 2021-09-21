@@ -24,12 +24,11 @@ function CreatePatient() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetch('http://localhost:5000/patient/', {
+        return fetcher('http://localhost:5000/patient/', {
             method: 'POST',
             body: data,
         }).then(async function(response) {
-            const responseObject = await response.json();
-            if (responseObject.success == true){
+            if (response.success == true){
                 alert("Добавлено карту")
                 push('/list/');
 

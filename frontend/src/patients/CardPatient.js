@@ -19,8 +19,8 @@ function CardPatient() {
     });
 
     useEffect(() => {
-        fetch('http://localhost:5000/patient/'+ id).then(async (response) => {
-            setPatient(await response.json());
+        fetcher('http://localhost:5000/patient/'+ id).then(async (response) => {
+            setPatient( response);
         })
     }, [id])
 
@@ -29,8 +29,7 @@ function CardPatient() {
         return fetcher('http://localhost:5000/patient/' + id, {
             method: 'DELETE',
         }).then(async function (response)  {
-          const responseObject = await response.json();
-            if (responseObject.success == true){
+            if (response.success == true){
                 alert("Удалено карту")
                 push('/list/');
 
@@ -51,7 +50,6 @@ function CardPatient() {
     function dischargePatient(){
         push('/discharge/' + id)
     }
-
 
     return (
        <div>
