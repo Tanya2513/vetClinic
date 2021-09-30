@@ -1,10 +1,10 @@
 function ListItemSpecies({item}) {
-    return <div>
-        <span> Вид: {item.type}</span>
-        <span> Опис: {item.description}</span>
-        <span> Особливості: {item.features}</span>
-        <span><a href={'/species/' + item.id}>Деталі</a></span>
-    </div>;
+    return <tr>
+        <td>{item.type}</td>
+        <td>{item.description}</td>
+        <td>{item.features}</td>
+        <td><a href={'/species/' + item.id}>Деталі</a></td>
+    </tr>;
 }
 
 export default ListItemSpecies;

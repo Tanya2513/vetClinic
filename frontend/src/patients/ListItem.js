@@ -1,12 +1,12 @@
 function ListItem({item}) {
-    return <div>
-        <span> Ім'я: {item.name}</span>
-        <span> Дата народження: {item.birthDate}</span>
-        <span> Вид: {item.species.type}</span>
-        <span> Діагноз: {item.diagnosis}</span>
-        <span> Дата звернення: {item.date}</span>
-        <span><a href={'/patient/' + item.id}>Деталі</a></span>
-    </div>;
+    return <tr>
+        <td>{item.name}</td>
+        <td>{item.birthDate}</td>
+        <td>{item.species.type}</td>
+        <td>{item.diagnosis}</td>
+        <td>{item.date}</td>
+        <td><a href={'/patient/' + item.id}>Деталі</a></td>
+    </tr>
 }
 
 export default ListItem;

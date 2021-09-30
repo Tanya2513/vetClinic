@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import ListItemSpecies from './ListItemSpecies';
 import fetcher from "../fetcher";
+import ListItem from "../patients/ListItem";
+import {Table} from "react-bootstrap";
 
 function ListSpecies() {
 
@@ -24,10 +26,89 @@ function ListSpecies() {
 
     console.log("listSpecies", listSpecies);
     return (
-        <div>
-            {listSpecies.map(speciesToListItem)}
-        </div>
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>Вид</th>
+                    <th>Опис</th>
+                    <th>Особливості</th>
+                    <th>Посилання</th>
+                </tr>
+                </thead>
+                <tbody>
+                {listSpecies.map(speciesToListItem)}
+                </tbody>
+            </Table>
     );
 }
 
 export default ListSpecies;
+//
+// <table>
+//     <tr>
+//         <td>stas</td>
+//     </tr>
+//     <tr>
+//         <td>tanya</td>
+//     </tr>
+// </table>
+//
+//
+// --------
+// |stas  |
+// --------
+// | tanya|
+// --------
+//
+// const inputArr = [
+//     {name: 'stas'},
+//     {name: 'tanya'},
+// ];
+// function renderRaw(a){
+//     return <div>a*2</div>;
+// }
+//
+// <Table>
+//     {inputArr.map(renderRaw)};
+// </Table>
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// [
+//     {type: 'носушка', description: 'хорошая', id: 3, features: 'серий'}
+//  {type: 'носушка', description: 'хорошая', id: 4, features: 'серий'}
+//  {type: 'кот', description: 'большой', id: 5, features: 'черний'}
+//
+// ]
+//
+//
+// <tr>
+//     <td>носушка</td>
+//     <td>хорошая</td>
+//     <td>3</td>
+//     <td>серий</td>
+// </tr>
+// <tr>
+//     <td>носушка</td>
+//     <td>хорошая</td>
+//     <td>4</td>
+//     <td>серий</td>
+// </tr>
+// <tr>
+//     <td>кот</td>
+//     <td>большой</td>
+//     <td>5</td>
+//     <td>черний</td>
+// </tr>

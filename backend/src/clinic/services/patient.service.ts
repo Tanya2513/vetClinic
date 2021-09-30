@@ -21,7 +21,7 @@ export class PatientService {
   // }
 
   async findOne(id: string): Promise<Patient> {
-    return await this.patientRepository.findOne(id);
+    return await this.hospitalizedPatientRepository.findOne(id);
   }
 
   async remove(id: string): Promise<DeleteResult> {

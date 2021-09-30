@@ -1,6 +1,8 @@
 import Input from "../form/Input";
 import {useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
+import {Col, Form, Row} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 function Login() {
     const {push} = useHistory();
@@ -35,13 +37,26 @@ function Login() {
 
     }
 
-    return <div>
-        <form>
-            <Input type="text" placeholder={"username"} setter={setUsername}/>
-            <Input type="password" placeholder={"password"} setter={setPassword}/>
-            <button type={"button"} onClick={authorize}>Зберегти</button>
-        </form>
-    </div>
+    return <Row  className="justify-content-md-center">
+        <Col xs={4}>
+            <Form>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Username:</Form.Label>
+                    <Input type="text" placeholder={"username"} setter={setUsername}/>
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Password:</Form.Label>
+                    <Input type="password" placeholder={"password"} setter={setPassword}/>
+                </Form.Group>
+
+                <Button variant="primary" type={"button"} onClick={authorize}>Зберегти</Button>
+            </Form>
+        </Col>
+
+    </Row>
 }
 
 export default Login;

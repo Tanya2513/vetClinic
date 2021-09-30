@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import {useEffect, useState} from "react";
 import fetcher from "../fetcher";
+import Button from 'react-bootstrap/Button';
 
 function CardPatient() {
     let { id } = useParams();
@@ -16,11 +17,14 @@ function CardPatient() {
         species: "",
         diagnosis: "",
         visitDate: "",
+        dateIn: "",
+        dateOut: "",
+        room: ""
     });
 
     useEffect(() => {
         fetcher('http://localhost:5000/patient/'+ id).then(async (response) => {
-            setPatient( response);
+            setPatient(response);
         })
     }, [id])
 
@@ -56,22 +60,25 @@ function CardPatient() {
            <div>
            {patient.name}
            {patient.birthDate}
-           {patient.species}
+           {patient.speciesId}
            {patient.diagnosis}
            {patient.visitDate}
+           {patient.dateIn}
+           {patient.dateOut}
+           {patient.room}
            </div>
-           <button onClick={deleteCard}>
+           <Button variant="secondary" onClick={deleteCard}>
                Удалить карту
-           </button>
-           <button onClick={editCard}>
+           </Button>
+           <Button variant="secondary" onClick={editCard}>
                Редактировать карту
-           </button>
-           <button onClick={hospitalizePatient}>
+           </Button>
+           <Button variant="secondary" onClick={hospitalizePatient}>
                Госпитализировать
-           </button>
-           <button onClick={dischargePatient}>
+           </Button>
+           <Button variant="secondary" onClick={dischargePatient}>
                Выписка пациента
-           </button>
+           </Button>
        </div>
 
     );

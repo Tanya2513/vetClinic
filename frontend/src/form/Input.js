@@ -1,5 +1,6 @@
+import {Form} from "react-bootstrap";
 function Input({setter, ...props}) {
-    return <input
+    return <Form.Control
         {...props}
         onChange={
             function (event) {

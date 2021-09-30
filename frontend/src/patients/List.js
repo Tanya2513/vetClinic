@@ -2,9 +2,11 @@ import {useEffect, useState} from "react";
 import ListItem from './ListItem';
 import Input from "../form/Input";
 import fetcher from "../fetcher";
+import {Col, Form, Row, Table} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 function List({dateNow}) {
-    
+
     //https://ru.reactjs.org/docs/hooks-reference.html#usestate
     //состояния
     const [list, setList] = useState([]);
@@ -66,24 +68,48 @@ const[speciesList, setSpeciesList]=useState([]);
         <div>
             <div>
                 <h3>Пошук за різними ознаками</h3>
-                <br/>
-                <form>
-                    <Input type="text" name="name" value={name} placeholder={"ім'я"} setter={setName}/>
-                    <p>
-                        <select onChange={optionChange} name="speciesId" size="1" >
-                            {optionList}
-                        </select>
-                    </p>
-                    <Input type="text" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
-                    <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
-                    <button type={"button"} onClick={search}>Шукати!</button>
-                </form>
+
+                <Form>
+                    <Row>
+                        <Col>
+                            <Input type="text" name="name" value={name} placeholder={"ім'я"} setter={setName}/>
+                        </Col>
+                        <Col>
+                            <Form.Select aria-label="Default select example" onChange={optionChange} name="speciesId" size="1">
+                                {optionList}
+                            </Form.Select>
+                        </Col>
+                        <Col>
+                            <Input type="text" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
+                        </Col>
+                        <Col>
+                            <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
+                        </Col>
+                        <Col>
+                            <Button type={"button"} onClick={search}>Шукати!</Button>
+                        </Col>
+                    </Row>
+                </Form>
             </div>
 
 
-            {list.map(function (item) {
-                return <ListItem item={item} key={item.id}/>;
-            })}
+            <Table striped bordered hover>
+                <thead>
+                <tr>
+                    <th>Ім'я</th>
+                    <th>Дата народження</th>
+                    <th>Вид</th>
+                    <th>Діагноз</th>
+                    <th>Дата звернення</th>
+                    <th>Посилання на картку</th>
+                </tr>
+                </thead>
+                <tbody>
+                {list.map(function (item) {
+                    return <ListItem item={item} key={item.id}/>;
+                })}
+                </tbody>
+            </Table>
         </div>
     );
 }
