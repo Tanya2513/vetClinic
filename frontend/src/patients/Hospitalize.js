@@ -2,6 +2,8 @@ import Input from "../form/Input";
 import {useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import fetcher from "../fetcher";
+import {Col, Form} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 function HospitalizePatient(){
     let { id } = useParams();
@@ -37,11 +39,16 @@ function HospitalizePatient(){
     }
 
     return <div>
-        <form>
-            <Input type="date" dateIn="dateIn" placeholder={"дата госпитализации"} setter={setDateIn}/>
-            <Input type="number" min="1"  max="20" room="room" placeholder={"номер палаты"} setter={setRoom}/>
-            <button type={"button"} onClick={save}>Зберегти</button>
-        </form>
+        <h1>Госпіталізація пацієнта</h1>
+        <Form>
+            <Col>
+                <Input className="form-card" type="date" dateIn="dateIn" placeholder={"дата госпитализации"} setter={setDateIn}/>
+            </Col>
+            <Col>
+                <Input className="form-card" type="number" min="1"  max="20" room="room" placeholder={"номер палаты"} setter={setRoom}/>
+            </Col>
+            <Button className="button-card" variant="secondary" type={"button"} onClick={save}>Зберегти</Button>
+        </Form>
     </div>
 }
 

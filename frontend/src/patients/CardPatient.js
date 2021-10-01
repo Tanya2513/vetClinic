@@ -57,27 +57,30 @@ function CardPatient() {
 
     return (
        <div>
+           <h1>Карта пацієнта</h1>
            <div>
-           {patient.name}
-           {patient.birthDate}
-           {patient.speciesId}
-           {patient.diagnosis}
-           {patient.visitDate}
-           {patient.dateIn}
-           {patient.dateOut}
-           {patient.room}
+               <ul className="card-patient">
+                   <li>Ім'я: {patient.name}</li>
+                   <li>Дата народження: {patient.birthDate}</li>
+                   <li>Вид: {patient.speciesId}</li>
+                   <li>Діагноз: {patient.diagnosis}</li>
+                   <li>Дата візиту: {patient.visitDate}</li>
+                   <li>Дата госпіталізації до стаціонару: {patient.dateIn}</li>
+                   <li>Дата виписки: {patient.dateOut}</li>
+                   <li>Номер палати у стаціонарі: {patient.room}</li>
+               </ul>
            </div>
-           <Button variant="secondary" onClick={deleteCard}>
-               Удалить карту
+           <Button className="button" variant="secondary" onClick={deleteCard}>
+               Видалити карту
            </Button>
-           <Button variant="secondary" onClick={editCard}>
-               Редактировать карту
+           <Button className="button" variant="secondary" onClick={editCard}>
+               Редагувати карту
            </Button>
-           <Button variant="secondary" onClick={hospitalizePatient}>
-               Госпитализировать
+           <Button className="button" variant="secondary" onClick={hospitalizePatient}>
+               Госпіталізувати пацієнта
            </Button>
-           <Button variant="secondary" onClick={dischargePatient}>
-               Выписка пациента
+           <Button className="button" variant="secondary" onClick={dischargePatient}>
+               Виписати пацієнта
            </Button>
        </div>
 

@@ -3,7 +3,7 @@ function ListItemSpecies({item}) {
         <td>{item.type}</td>
         <td>{item.description}</td>
         <td>{item.features}</td>
-        <td><a href={'/species/' + item.id}>Деталі</a></td>
+        <td><a className="link-card" href={'/species/' + item.id}>Деталі</a></td>
     </tr>;
 }
 

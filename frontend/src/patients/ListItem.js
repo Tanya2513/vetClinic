@@ -4,8 +4,8 @@ function ListItem({item}) {
         <td>{item.birthDate}</td>
         <td>{item.species.type}</td>
         <td>{item.diagnosis}</td>
-        <td>{item.date}</td>
-        <td><a href={'/patient/' + item.id}>Деталі</a></td>
+        <td>{item.visitDate}</td>
+        <td><a className="link-card" href={'/patient/' + item.id}>Перейти до картки пацієнта</a></td>
     </tr>
 }
 

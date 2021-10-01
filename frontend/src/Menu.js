@@ -16,27 +16,24 @@ function Menu({refresh}) {
         mainMenu = <>
         </>;
     } else {
-        mainMenu = <>
-            <Nav.Link href="/list" onClick={refresh}>Список пациентов</Nav.Link>
-            <Nav.Link href="/patient/create">Добавить нового пациента</Nav.Link>
+        mainMenu =
+        <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+            <Nav.Link href="/list" onClick={refresh}>Список пацієнтів</Nav.Link>
+            <Nav.Link href="/patient/create">Додати нового пацієнта</Nav.Link>
             <Nav.Link href="/list_species">Довідник тварин</Nav.Link>
-            <Nav.Link href="/species/createSpecies">Добавить новий вид</Nav.Link>
-            <Nav.Link href="#" onClick={logout}>Выход</Nav.Link>
-
-        </>;
+            <Nav.Link href="/species/createSpecies">Додати новий вид</Nav.Link>
+            <Nav.Link href="#" onClick={logout}>Вихід</Nav.Link>
+            </Nav>
+        </Navbar.Collapse>;
     }
 
 
     return <Navbar bg="light" expand="lg">
         <Container>
-            <Navbar.Brand href="#home">VET_CLINIC</Navbar.Brand>
+            <Navbar.Brand href="/">LAPA</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
                     {mainMenu}
-                </Nav>
-            </Navbar.Collapse>
         </Container>
     </Navbar>
 }

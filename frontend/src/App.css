@@ -1,0 +1,54 @@
+ .main {
+   text-align: center;
+     margin: 30px;
+ }
+
+ .description{
+     text-align: center;
+     font-size: 20px;
+     font-weight: 400;
+     border: lightgray 2px solid;
+     margin: 50px;
+     padding: 30px;
+ }
+
+.search{
+    text-align: center;
+    margin: 50px;
+}
+
+ .search-form{
+     margin-bottom: 50px;
+     margin-left: 100px;
+ }
+
+ .card-patient li{
+     font-size: 20px;
+ }
+
+ .button{
+     margin: 10px;
+     background-color: lightgray;
+     color: black;
+ }
+
+ .name-card{
+     margin: 30px;
+     text-align: center;
+ }
+
+ .form-card{
+     margin-top: 30px;
+     margin-bottom: 30px;
+ }
+
+ .button-card{
+     margin-top: 30px;
+ }
+
+ .link-card{
+     color: black;
+ }
+ .link-card:hover{
+     color: darkgray;
+ }

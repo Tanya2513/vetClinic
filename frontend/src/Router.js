@@ -17,7 +17,7 @@ import {useState} from "react";
 import Discharge from "./patients/Discharge";
 import Login from "./auth/Login";
 import Menu from "./Menu";
-
+import Home from "./patients/Home";
 
 function Router() {
 
@@ -48,7 +48,6 @@ function Router() {
                     <Route path="/edit/:id">
                         <EditPatient/>
                     </Route>
-
                     <Route path="/species/createSpecies">
                         <CreateSpecies/>
                     </Route>
@@ -69,6 +68,9 @@ function Router() {
                     </Route>
                     <Route path="/login">
                         <Login/>
+                    </Route>
+                    <Route path="/">
+                        <Home/>
                     </Route>
                 </Switch>
         </BrowserRouter>

@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import Input from "../form/Input";
 import {useHistory, useParams} from "react-router-dom";
 import fetcher from "../fetcher";
+import {Col, Form, Row} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 //компонент
 function EditPatient() {
@@ -77,18 +79,29 @@ function EditPatient() {
     let optionList = speciesList.map(itemToOption);
     return (
         <div>
-            <form>
-                <Input type="text" name="name" value={name} placeholder={"ім'я"} setter={setName}/>
-                <Input type="text" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
-                <p>
-                    <select onChange={optionChange} name="speciesId" size="1" value={speciesId}>
+            <h1>Редагування картки пацієнта</h1>
+            <Form>
+                <Col>
+                    <Input className="form-card" type="text" name="name" value={name} placeholder={"ім'я"} setter={setName}/>
+                </Col>
+                <Col>
+                    <Input className="form-card" type="text" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
+
+                </Col>
+                <Col>
+                    <Form.Select className="form-card" aria-label="Default select example" onChange={optionChange} name="speciesId" size="1" value={speciesId}>
                         {optionList}
-                    </select>
-                </p>
-                <Input type="text" name="diagnosis" value={diagnosis} placeholder={"діагноз"} setter={setDiagnosis}/>
-                <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
-                <button type={"button"} onClick={save}>Зберегти</button>
-            </form>
+                    </Form.Select>
+                </Col>
+                <Col>
+                    <Input className="form-card" type="text" name="diagnosis" value={diagnosis} placeholder={"діагноз"} setter={setDiagnosis}/>
+
+                </Col>
+                <Col>
+                    <Input className="form-card" type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
+                </Col>
+                <Button className="button-card" variant="secondary" type={"button"} onClick={save}>Зберегти</Button>
+            </Form>
         </div>
     );
 }

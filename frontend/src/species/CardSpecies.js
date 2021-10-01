@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 import {useEffect, useState} from "react";
 import fetcher from "../fetcher";
+import Button from "react-bootstrap/Button";
 
 function CardSpecies() {
     let { id } = useParams();
@@ -43,17 +44,23 @@ function CardSpecies() {
 
     return (
        <div>
+           <h1>{species.type}</h1>
            <div>
-           {species.type}
-           {species.description}
-           {species.features}
+               <ul className="card-patient">
+                   <li>
+                      Опис: {species.description}
+                   </li>
+                   <li>
+                      Особливості: {species.features}
+                   </li>
+               </ul>
            </div>
-           <button onClick={deleteCard}>
-               Удалить карту
-           </button>
-           <button onClick={editCard}>
-               Редактировать карту
-           </button>
+           <Button className="button" variant="secondary" onClick={deleteCard}>
+               Видалити карту
+           </Button>
+           <Button className="button" variant="secondary" onClick={editCard}>
+               Редагувати карту
+           </Button>
        </div>
 
     );

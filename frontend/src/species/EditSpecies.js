@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import Input from "../form/Input";
 import {useHistory, useParams} from "react-router-dom";
 import fetcher from "../fetcher";
+import {Col, Form} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 //компонент
 function EditSpecies() {
@@ -54,12 +56,20 @@ function EditSpecies() {
 
     return (
         <div>
-            <form>
-                <Input type="text" name="type" value={type} placeholder={"вид"} setter={setType}/>
-                <Input type="text" name="description" value={description} placeholder={"опис"} setter={setDescription}/>
-                <Input type="text" name="features" value={features} placeholder={"особливості"} setter={setFeatures}/>
-                <button type={"button"} onClick={save}>Зберегти</button>
-            </form>
+            <h1>Редагувати інформацію про даний вид тварин</h1>
+            <Form>
+                <Col>
+                    <Input className="form-card" type="text" name="type" value={type} placeholder={"вид"} setter={setType}/>
+
+                </Col>
+                <Col>
+                    <Input className="form-card" type="text" name="description" value={description} placeholder={"опис"} setter={setDescription}/>
+                </Col>
+                <Col>
+                    <Input className="form-card" type="text" name="features" value={features} placeholder={"особливості"} setter={setFeatures}/>
+                </Col>
+                <Button className="button-card" variant="secondary" type={"button"} onClick={save}>Зберегти</Button>
+            </Form>
         </div>
     );
 }

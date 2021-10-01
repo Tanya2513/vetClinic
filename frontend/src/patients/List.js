@@ -67,9 +67,9 @@ const[speciesList, setSpeciesList]=useState([]);
     return (
         <div>
             <div>
-                <h3>Пошук за різними ознаками</h3>
+                <h1 className="search">Список пацієнтів клініки</h1>
 
-                <Form>
+                <Form className="search-form">
                     <Row>
                         <Col>
                             <Input type="text" name="name" value={name} placeholder={"ім'я"} setter={setName}/>
@@ -80,13 +80,13 @@ const[speciesList, setSpeciesList]=useState([]);
                             </Form.Select>
                         </Col>
                         <Col>
-                            <Input type="text" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
+                            <Input type="date" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
                         </Col>
                         <Col>
-                            <Input type="text" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
+                            <Input type="date" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
                         </Col>
                         <Col>
-                            <Button type={"button"} onClick={search}>Шукати!</Button>
+                            <Button variant="secondary" type={"button"} onClick={search}>Шукати!</Button>
                         </Col>
                     </Row>
                 </Form>
@@ -101,7 +101,7 @@ const[speciesList, setSpeciesList]=useState([]);
                     <th>Вид</th>
                     <th>Діагноз</th>
                     <th>Дата звернення</th>
-                    <th>Посилання на картку</th>
+                    <th>Деталі</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -2,6 +2,8 @@ import {useState} from "react";
 import Input from "../form/Input";
 import {useHistory} from "react-router-dom";
 import fetcher from "../fetcher";
+import {Col, Form} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 
 function CreateSpecies() {
     const [type, setType] = useState('');
@@ -38,12 +40,19 @@ function CreateSpecies() {
 
     return (
         <div>
-            <form>
-                <Input type="text" name="type" placeholder={"вид"} setter={setType}/>
-                <Input type="text" name="description" placeholder={"опис"} setter={setDescription}/>
-                <Input type="text" name="features" placeholder={"особливості"} setter={setFeatures}/>
-                <button type={"button"} onClick={save}>Зберегти</button>
-            </form>
+            <h1> Додати новий вид тварин у довідник</h1>
+            <Form>
+                <Col>
+                    <Input className="form-card" type="text" name="type" placeholder={"вид"} setter={setType}/>
+                </Col>
+                <Col>
+                    <Input className="form-card" type="text" name="description" placeholder={"опис"} setter={setDescription}/>
+                </Col>
+                <Col>
+                    <Input className="form-card" type="text" name="features" placeholder={"особливості"} setter={setFeatures}/>
+                </Col>
+                <Button className="button-card" variant="secondary" type={"button"} onClick={save}>Зберегти</Button>
+            </Form>
         </div>
     );
 }
