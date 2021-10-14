@@ -15,6 +15,7 @@ import CardSpecies from "./species/CardSpecies";
 import EditSpecies from "./species/EditSpecies";
 import {useState} from "react";
 import Discharge from "./patients/Discharge";
+import Remote from "./patients/Remote";
 import Login from "./auth/Login";
 import Menu from "./Menu";
 import Home from "./patients/Home";
@@ -65,6 +66,9 @@ function Router() {
                     </Route>
                     <Route path="/discharge/:id">
                         <Discharge/>
+                    </Route>
+                    <Route path="/remote/:id">
+                        <Remote/>
                     </Route>
                     <Route path="/login">
                         <Login/>

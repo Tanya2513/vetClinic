@@ -55,6 +55,10 @@ function CardPatient() {
         push('/discharge/' + id)
     }
 
+    function remotePatient(){
+        push('/remote/' + id)
+    }
+
     return (
        <div>
            <h1>Карта пацієнта</h1>
@@ -81,6 +85,9 @@ function CardPatient() {
            </Button>
            <Button className="button" variant="secondary" onClick={dischargePatient}>
                Виписати пацієнта
+           </Button>
+           <Button className="button" variant="secondary" onClick={remotePatient}>
+               Виклик лікаря
            </Button>
        </div>
 

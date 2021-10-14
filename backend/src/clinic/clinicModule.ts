@@ -11,6 +11,7 @@ import { PatientController } from './controllers/patient.controller';
 import { SpeciesController } from './controllers/species.controller';
 import { UsersModule } from '../users/users.module';
 import { AuthModule } from '../auth/auth.module';
+import { RemotePatient } from './entities/remotePatient.entity';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AuthModule } from '../auth/auth.module';
     AuthModule,
     TypeOrmModule.forFeature([Patient]),
     TypeOrmModule.forFeature([HospitalizedPatient]),
+    TypeOrmModule.forFeature([RemotePatient]),
     TypeOrmModule.forFeature([Species]),
     TypeOrmModule.forRoot({ autoLoadEntities: true }),
   ],

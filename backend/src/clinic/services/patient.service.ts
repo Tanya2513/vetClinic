@@ -6,6 +6,7 @@ import { HospitalizedPatient } from '../entities/hospitalizedPatient.entity';
 import { CreatePatientDto } from '../dto/create-patient.dto';
 import { ListPatientDto } from '../dto/list-patient.dto';
 import { UpdatePatientDto } from '../dto/update-patient.dto';
+import { RemotePatient } from '../entities/remotePatient.entity';
 
 @Injectable()
 export class PatientService {
@@ -14,14 +15,31 @@ export class PatientService {
     private patientRepository: Repository<Patient>,
     @InjectRepository(HospitalizedPatient)
     private hospitalizedPatientRepository: Repository<HospitalizedPatient>,
+    @InjectRepository(RemotePatient)
+    private remotePatientRepository: Repository<RemotePatient>,
   ) {}
 
   // async findAll(): Promise<Patient[]> {
   //   return await this.patientRepository.find();
   // }
 
+  // const queryBuilder = getConnection()
+  //     .createQueryBuilder()
+  //     .select('patient', 'patient')
+  //     .where('patient.id = :id', { id })
+  //     .orderBy('patient.id', 'DESC')
+  //     .leftJoinAndSelect('patient.species', 'species');
+  //
+  // return await queryBuilder.getOne();
+
   async findOne(id: string): Promise<Patient> {
-    return await this.hospitalizedPatientRepository.findOne(id);
+    const query = this.patientRepository
+      .createQueryBuilder('patient')
+      .select('patient.*')
+      .leftJoinAndSelect('patient.species', 'species')
+      .where('patient.id = :id', { id });
+
+    return await query.getRawOne<Patient>();
   }
 
   async remove(id: string): Promise<DeleteResult> {
@@ -52,8 +70,6 @@ export class PatientService {
       queryBuilder.andWhere('patient.speciesId = :speciesId', {
         speciesId: query.speciesId,
       });
-
-    console.log('Database query', queryBuilder.getQuery());
 
     return await queryBuilder.getMany();
   }
@@ -98,5 +114,16 @@ export class PatientService {
       await this.hospitalizedPatientRepository.findOne(id);
     hospitalizedPatient.discharge(dateOut);
     return await this.hospitalizedPatientRepository.save(hospitalizedPatient);
+  }
+
+  async remote(
+    id: number,
+    remoteVisitDate: string,
+    remoteVisitAddress: string,
+  ) {
+    const remotePatient = await this.remotePatientRepository.findOne(id);
+    remotePatient.remoteVisitDate = remoteVisitDate;
+    remotePatient.remoteVisitAddress = remoteVisitAddress;
+    return await this.remotePatientRepository.save(remotePatient);
   }
 }

@@ -20,6 +20,8 @@ import { HospitalizedPatient } from '../entities/hospitalizedPatient.entity';
 import { HospitalizePatientDto } from '../dto/hospitalize-patient.dto';
 import { DischargePatientDto } from '../dto/discharge-patient.dto';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { RemotePatientDto } from '../dto/remote-patient.dto';
+import {RemotePatient} from "../entities/remotePatient.entity";
 
 @Controller('patient')
 @UseInterceptors(ClassSerializerInterceptor)
@@ -80,6 +82,24 @@ export class PatientController {
       dischargePatientDto.dateOut,
     );
     if (dischargePatient instanceof HospitalizedPatient) {
+      return {
+        success: true,
+      };
+    } else {
+      return {
+        success: false,
+      };
+    }
+  }
+
+  @Put('remote')
+  async remote(@Body() remotePatientDto: RemotePatientDto) {
+    const remotePatient = await this.patientService.remote(
+      remotePatientDto.id,
+      remotePatientDto.remoteVisitDate,
+      remotePatientDto.remoteVisitAddress,
+    );
+    if (remotePatient instanceof RemotePatient) {
       return {
         success: true,
       };
