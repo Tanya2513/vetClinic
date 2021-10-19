@@ -15,11 +15,16 @@ function CardPatient() {
         name: "",
         birthDate: "",
         species: "",
+        breed: "",
         diagnosis: "",
         visitDate: "",
         dateIn: "",
         dateOut: "",
-        room: ""
+        room: "",
+        animalOwner: "",
+        numberOwner: "",
+        remoteVisitDate: "",
+        remoteVisitAddress:"",
     });
 
     useEffect(() => {
@@ -34,11 +39,11 @@ function CardPatient() {
             method: 'DELETE',
         }).then(async function (response)  {
             if (response.success == true){
-                alert("Удалено карту")
+                alert("Карту видалено")
                 push('/list/');
 
             } else {
-                alert("Ошибка")
+                alert("Помилка")
             }
         })
     }
@@ -67,11 +72,16 @@ function CardPatient() {
                    <li>Ім'я: {patient.name}</li>
                    <li>Дата народження: {patient.birthDate}</li>
                    <li>Вид: {patient.speciesId}</li>
+                   <li>Порода: {patient.breed}</li>
                    <li>Діагноз: {patient.diagnosis}</li>
                    <li>Дата візиту: {patient.visitDate}</li>
                    <li>Дата госпіталізації до стаціонару: {patient.dateIn}</li>
                    <li>Дата виписки: {patient.dateOut}</li>
                    <li>Номер палати у стаціонарі: {patient.room}</li>
+                   <li>ПІБ власника: {patient.animalOwner}</li>
+                   <li>Телефон власника: {patient.numberOwner}</li>
+                   <li>Виїз лікаря(дата, час): {patient.remoteVisitDate}</li>
+                   <li>Адреса: {patient.remoteVisitAddress}</li>
                </ul>
            </div>
            <Button className="button" variant="secondary" onClick={deleteCard}>

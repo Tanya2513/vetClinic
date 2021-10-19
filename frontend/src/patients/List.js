@@ -80,27 +80,19 @@ const[speciesList, setSpeciesList]=useState([]);
                             </Form.Select>
                         </Col>
                         <Col>
-                            <Input type="date" name="birthDate" value={birthDate} placeholder={"дата народження"} setter={setBirthDate}/>
-                        </Col>
-                        <Col>
-                            <Input type="date" name="visitDate" value={visitDate} placeholder={"дата"} setter={setVisitDate}/>
-                        </Col>
-                        <Col>
                             <Button variant="secondary" type={"button"} onClick={search}>Шукати!</Button>
                         </Col>
                     </Row>
                 </Form>
             </div>
-
-
             <Table striped bordered hover>
                 <thead>
                 <tr>
                     <th>Ім'я</th>
-                    <th>Дата народження</th>
                     <th>Вид</th>
                     <th>Діагноз</th>
                     <th>Дата звернення</th>
+                    <th>ПІБ власника</th>
                     <th>Деталі</th>
                 </tr>
                 </thead>

@@ -21,7 +21,7 @@ import { HospitalizePatientDto } from '../dto/hospitalize-patient.dto';
 import { DischargePatientDto } from '../dto/discharge-patient.dto';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { RemotePatientDto } from '../dto/remote-patient.dto';
-import {RemotePatient} from "../entities/remotePatient.entity";
+import { RemotePatient } from '../entities/remotePatient.entity';
 
 @Controller('patient')
 @UseInterceptors(ClassSerializerInterceptor)

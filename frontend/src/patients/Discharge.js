@@ -28,11 +28,11 @@ function DischargePatient(){
             body: data,
         }).then(async function(responseObject) {
             if (responseObject.success == true){
-                alert("Информация добавлена")
+                alert("Інформацію внесено")
                 push('/patient/' + id);
 
             } else {
-                alert("Ошибка")
+                alert("Помилка")
             }
         })
 

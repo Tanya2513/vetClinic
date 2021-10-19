@@ -52,7 +52,7 @@ function Login() {
                     <Input type="password" placeholder={"password"} setter={setPassword}/>
                 </Form.Group>
 
-                <Button variant="primary" type={"button"} onClick={authorize}>Зберегти</Button>
+                <Button variant="primary" type={"button"} onClick={authorize}>Увійти</Button>
             </Form>
         </Col>
 

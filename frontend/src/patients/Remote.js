@@ -30,11 +30,11 @@ function Remote(){
             body: data,
         }).then(async function(responseObject) {
             if (responseObject.success == true){
-                alert("Информация добавлена")
+                alert("Інформацію додано")
                 push('/patient/' + id);
 
             } else {
-                alert("Ошибка")
+                alert("Помилка")
             }
         })
 
@@ -47,7 +47,7 @@ function Remote(){
                 <Input className="form-card" type="datetime-local"  setter={setRemoteVisitDate}/>
             </Col>
             <Col>
-                <Input className="form-card" type="text"  setter={setRemoteVisitAddress}/>
+                <Input className="form-card" type="text"  placeholder="адреса" setter={setRemoteVisitAddress}/>
             </Col>
             <Button className="button-card" variant="secondary" type={"button"} onClick={save}>Зберегти</Button>
         </Form>

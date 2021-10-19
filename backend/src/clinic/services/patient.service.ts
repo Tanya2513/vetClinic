@@ -79,9 +79,12 @@ export class PatientService {
       createPatientDto.name,
       createPatientDto.birthDate,
       createPatientDto.speciesId,
+      createPatientDto.breed,
+      createPatientDto.diagnosis,
       createPatientDto.visitDate,
+      createPatientDto.animalOwner,
+      createPatientDto.numberOwner,
     );
-    patient.diagnosis = createPatientDto.diagnosis;
 
     return await this.patientRepository.save(patient);
   }
@@ -91,8 +94,11 @@ export class PatientService {
     patient.name = updatePatientDto.name;
     patient.birthDate = updatePatientDto.birthDate;
     patient.speciesId = updatePatientDto.speciesId;
+    patient.breed = updatePatientDto.breed;
     patient.diagnosis = updatePatientDto.diagnosis;
     patient.visitDate = updatePatientDto.visitDate;
+    patient.animalOwner = updatePatientDto.animalOwner;
+    patient.numberOwner = updatePatientDto.numberOwner;
     return await this.patientRepository.save(patient);
   }
 

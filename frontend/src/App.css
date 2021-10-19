@@ -38,8 +38,14 @@
  }
 
  .form-card{
-     margin-top: 30px;
-     margin-bottom: 30px;
+     margin-top: 0px;
+     margin-bottom: 0px;
+     font-size: 14px;
+ }
+
+ .name-input{
+     color: darkgray;
+     font-size: 10px;
  }
 
  .button-card{

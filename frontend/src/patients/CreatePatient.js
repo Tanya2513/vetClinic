@@ -1,4 +1,4 @@
-import {useState,useEffect} from "react";
+import {useState, useEffect} from "react";
 import Input from "../form/Input";
 import {useHistory} from "react-router-dom";
 import fetcher from "../fetcher";
@@ -9,17 +9,25 @@ function CreatePatient() {
     const [name, setName] = useState('');
     const [birthDate, setBirthDate] = useState('');
     const [speciesId, setSpeciesId] = useState('');
+    const [breed, setBreed] = useState('');
     const [diagnosis, setDiagnosis] = useState('');
     const [visitDate, setVisitDate] = useState('');
+    const [animalOwner, setAnimalOwner] = useState('');
+    const [numberOwner, setNumberOwner] = useState('');
+
     const {push} = useHistory();
 
-    function save() {
+    function save(event) {
+        event.preventDefault();
         const formData = new FormData();
         formData.append('name', name);
         formData.append('birthDate', birthDate);
         formData.append('speciesId', speciesId);
+        formData.append('breed', breed);
         formData.append('diagnosis', diagnosis);
         formData.append('visitDate', visitDate);
+        formData.append('animalOwner', animalOwner);
+        formData.append('numberOwner', numberOwner);
 
         const data = new URLSearchParams();
         for (const pair of formData) {
@@ -29,18 +37,19 @@ function CreatePatient() {
         return fetcher('http://localhost:5000/patient/', {
             method: 'POST',
             body: data,
-        }).then(async function(response) {
-            if (response.success == true){
-                alert("Добавлено карту")
+        }).then(async function (response) {
+            if (response.success == true) {
+                alert("Карту додано")
                 push('/list/');
 
             } else {
-                alert("Ошибка")
+                alert("Помилка")
             }
         })
 
     }
-    const[speciesList, setSpeciesList]=useState([]);
+
+    const [speciesList, setSpeciesList] = useState([]);
 
     useEffect(() => {
         fetcher('http://localhost:5000/species').then(async (answer) => {
@@ -50,11 +59,11 @@ function CreatePatient() {
         })
     }, [])
 
-    function optionChange(event){
+    function optionChange(event) {
         setSpeciesId(event.target.value);
     }
 
-    function itemToOption(item){
+    function itemToOption(item) {
         console.log(item);
         return <option value={item.id} key={item.id}>{item.type}</option>;
     }
@@ -65,27 +74,50 @@ function CreatePatient() {
     return (
         <div>
             <h1 className="name-card">Створення картки нового пацієнта</h1>
-            <Form>
-
-                    <Col>
-                        <Input className="form-card" type="text" name="name" placeholder={"ім'я"} setter={setName}/>
-                    </Col>
-                    <Col>
-                        <Input className="form-card" type="date" name="birthDate" placeholder={"дата народження"} setter={setBirthDate}/>
-                    </Col>
-                    <Col>
-                        <Form.Select className="form-card" aria-label="Default select example" onChange={optionChange} name="speciesId" size="1" >
-                            {optionList}
-                        </Form.Select>
-                    </Col>
+            <Form onSubmit={save}>
                 <Col>
-                    <Input className="form-card" type="text" name="diagnosis" placeholder={"діагноз"} setter={setDiagnosis}/>
+                    <label className="name-input"> Ім'я </label>
+                    <Input className="form-card" type="text" name="name" required="required"
+                           setter={setName}/>
                 </Col>
                 <Col>
-                    <Input className="form-card" type="date" name="visitDate" placeholder={"дата"} setter={setVisitDate}/>
+                    <label className="name-input"> Дата народження </label>
+                    <Input className="form-card" type="date" name="birthDate" required="required"
+                           placeholder={"дата народження"} setter={setBirthDate}/>
                 </Col>
-
-                <Button className="button-card" variant="secondary" type={"button"} onClick={save}>Зберегти</Button>
+                <Col>
+                    <label className="name-input"> Вид </label>
+                    <Form.Select className="form-card" aria-label="Default select example" onChange={optionChange}
+                                 name="speciesId" size="1">
+                        {optionList}
+                    </Form.Select>
+                </Col>
+                <Col>
+                    <label className="name-input"> Порода </label>
+                    <Input className="form-card" type="text" name="breed" required="required"
+                            setter={setBreed}/>
+                </Col>
+                <Col>
+                    <label className="name-input"> Діагноз </label>
+                    <Input className="form-card" type="text" name="diagnosis"
+                           setter={setDiagnosis}/>
+                </Col>
+                <Col>
+                    <label className="name-input"> Дата візиту </label>
+                    <Input className="form-card" type="date" name="visitDate"
+                           setter={setVisitDate}/>
+                </Col>
+                <Col>
+                    <label className="name-input"> ПІБ власника </label>
+                    <Input className="form-card" type="text" name="animalOwner" required="required"
+                            setter={setAnimalOwner}/>
+                </Col>
+                <Col>
+                    <label className="name-input"> Номер власника </label>
+                    <Input className="form-card" type="text" name="numberOwner" required="required"
+                            setter={setNumberOwner}/>
+                </Col>
+                <Button className="button-card" variant="secondary" type={"submit"}> Зберегти</Button>
             </Form>
         </div>
     );

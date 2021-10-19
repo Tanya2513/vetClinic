@@ -28,11 +28,11 @@ function HospitalizePatient(){
             body: data,
         }).then(async function(responseObject) {
             if (responseObject.success == true){
-                alert("Информация добавлена")
+                alert("Інформацію додано")
                 push('/patient/' + id);
 
             } else {
-                alert("Ошибка")
+                alert("Помилка")
             }
         })
 

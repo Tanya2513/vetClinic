@@ -4,12 +4,40 @@ import { Exclude, Expose } from 'class-transformer';
 
 @Entity({ name: 'patient' })
 export class HospitalizedPatient extends Patient {
+  constructor(
+    name: string,
+    birthDate: string,
+    speciesId: number,
+    breed: string,
+    diagnosis: string,
+    visitDate: string,
+    animalOwner: string,
+    numberOwner: string,
+    dateIn: string,
+    dateOut: string,
+    room: number,
+  ) {
+    super(
+      name,
+      birthDate,
+      speciesId,
+      breed,
+      diagnosis,
+      visitDate,
+      animalOwner,
+      numberOwner,
+    );
+    this._dateIn = dateIn;
+    this._dateOut = dateOut;
+    this._room = room;
+  }
+
   @Exclude()
-  @Column({ name: 'dateIn', type: 'date', nullable: true })
+  @Column({ name: 'dateIn', nullable: true })
   private _dateIn: string;
 
   @Exclude()
-  @Column({ type: 'date', name: 'dateOut', nullable: true })
+  @Column({ name: 'dateOut', nullable: true })
   private _dateOut: string;
 
   @Exclude()
