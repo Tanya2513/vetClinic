@@ -25,16 +25,9 @@ export class SpeciesService {
     return await this.speciesRepository.delete(id);
   }
 
-  getHello(): string {
-    return 'Hello World!';
-  }
-
   async getList(query: ListSpeciesDto): Promise<Species[]> {
-    let result1 = await this.speciesRepository.find();
-    console.log(result1);
-    return result1;
+    return await this.speciesRepository.find();
   }
-
 
   async create(createSpeciesDto: CreateSpeciesDto): Promise<Species> {
     const species = new Species(

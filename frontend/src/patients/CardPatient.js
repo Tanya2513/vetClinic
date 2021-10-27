@@ -71,7 +71,7 @@ function CardPatient() {
                <ul className="card-patient">
                    <li>Ім'я: {patient.name}</li>
                    <li>Дата народження: {patient.birthDate}</li>
-                   <li>Вид: {patient.speciesId}</li>
+                   <li>Вид: {patient.species_type}</li>
                    <li>Порода: {patient.breed}</li>
                    <li>Діагноз: {patient.diagnosis}</li>
                    <li>Дата візиту: {patient.visitDate}</li>

@@ -26,6 +26,6 @@ import { RemotePatient } from './entities/remotePatient.entity';
   controllers: [AppController, PatientController, SpeciesController],
   providers: [PatientService, SpeciesService],
 })
-export class ClinicModule {
+export class VetClinicModule {
   constructor(private connection: Connection) {}
 }

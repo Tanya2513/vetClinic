@@ -55,7 +55,6 @@ function Login() {
                 <Button variant="primary" type={"button"} onClick={authorize}>Увійти</Button>
             </Form>
         </Col>
-
     </Row>
 }
 

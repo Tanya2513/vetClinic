@@ -1,21 +1,15 @@
 import { Injectable } from '@nestjs/common';
-
-// This should be a real class/interface representing a user entity
-export type User = any;
+import User from './model/User';
 
 @Injectable()
 export class UsersService {
   private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
+    // User сворено для демонстраційних цілей.
+    // Можливе зверігання Users у базі данних з шифруванням паролю,
+    // але ми не будемо це авторизацію у рамках цієї роботи
+
+    new User(1, 'john', 'changeme'),
+    new User(2, 'maria', 'guess'),
   ];
 
   async findOne(username: string): Promise<User | undefined> {
