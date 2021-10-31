@@ -34,7 +34,6 @@ function Login() {
                 push('/list');
             }
         })
-
     }
 
     return <Row  className="justify-content-md-center">
@@ -51,7 +50,6 @@ function Login() {
                     <Form.Label>Password:</Form.Label>
                     <Input type="password" placeholder={"password"} setter={setPassword}/>
                 </Form.Group>
-
                 <Button variant="primary" type={"button"} onClick={authorize}>Увійти</Button>
             </Form>
         </Col>
