@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Species } from '../entities/species.entity';
 import { CreateSpeciesDto } from '../dto/create-species.dto';
-import { ListSpeciesDto } from '../dto/list-species.dto';
 import { UpdateSpeciesDto } from '../dto/update-species.dto';
 
 @Injectable()
@@ -25,7 +24,7 @@ export class SpeciesService {
     return await this.speciesRepository.delete(id);
   }
 
-  async getList(query: ListSpeciesDto): Promise<Species[]> {
+  async getList(): Promise<Species[]> {
     return await this.speciesRepository.find();
   }
 

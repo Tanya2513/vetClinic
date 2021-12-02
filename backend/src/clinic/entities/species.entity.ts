@@ -15,17 +15,17 @@ export class Species {
   }
 
   @PrimaryGeneratedColumn()
-  id: number;
+  public id: number;
 
   @Column()
-  type: string;
+  public type: string;
 
   @Column()
-  description: string;
+  public description: string;
 
   @Column()
-  features: string;
+  public features: string;
 
   @OneToMany((type) => Patient, (patient) => patient.species)
-  patient: Patient[];
+  public patient: Patient[];
 }

@@ -42,8 +42,8 @@ export class SpeciesController {
   }
 
   @Get()
-  async getList(@Query() query: ListSpeciesDto) {
-    return await this.speciesService.getList(query);
+  async getList() {
+    return await this.speciesService.getList();
   }
 
   @Get(':id')

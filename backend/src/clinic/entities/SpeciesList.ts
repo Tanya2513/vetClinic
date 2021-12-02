@@ -1,8 +1,7 @@
-import {Species} from "./species.entity";
+import { Species } from './species.entity';
 
 export default class SpeciesList {
   private _list: Species[];
-
 
   constructor(list: Species[]) {
     this._list = list;

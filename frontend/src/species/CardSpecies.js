@@ -30,8 +30,7 @@ function CardSpecies() {
         }).then(async function (responseObject) {
             if (responseObject.success == true) {
                 alert("Карту видалено")
-``                push('/list_species');
-
+                push('/list_species');
             } else if (responseObject.success == false) {
                 alert(responseObject.message)
             } else {

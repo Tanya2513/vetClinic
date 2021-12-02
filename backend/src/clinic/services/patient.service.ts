@@ -19,19 +19,6 @@ export class PatientService {
     private remotePatientRepository: Repository<RemotePatient>,
   ) {}
 
-  // async findAll(): Promise<Patient[]> {
-  //   return await this.patientRepository.find();
-  // }
-
-  // const queryBuilder = getConnection()
-  //     .createQueryBuilder()
-  //     .select('patient', 'patient')
-  //     .where('patient.id = :id', { id })
-  //     .orderBy('patient.id', 'DESC')
-  //     .leftJoinAndSelect('patient.species', 'species');
-  //
-  // return await queryBuilder.getOne();
-
   async findOne(id: string): Promise<Patient> {
     const query = this.patientRepository
       .createQueryBuilder('patient')
@@ -46,16 +33,7 @@ export class PatientService {
     return await this.patientRepository.delete(id);
   }
 
-  getHello(): string {
-    return 'Hello World!';
-  }
-
   async getList(query: ListPatientDto): Promise<Patient[]> {
-    // console.log('condition', condition);
-    // return await this.patientRepository.find({
-    //   where: [condition],
-    // });
-
     const queryBuilder = this.patientRepository
       .createQueryBuilder('patient')
       .orderBy('patient.id', 'DESC')
