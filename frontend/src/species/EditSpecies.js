@@ -43,11 +43,11 @@ function EditSpecies() {
             body: data,
         }).then(async function (responseObject) {
             if (responseObject.success == true) {
-                alert("Изменения внесены")
+                alert("Зміни внесено")
                 push('/species/' + id);
 
             } else {
-                alert("Ошибка")
+                alert("Помилка")
             }
         })
 

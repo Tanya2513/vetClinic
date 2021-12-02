@@ -29,13 +29,13 @@ function CardSpecies() {
             method: 'DELETE',
         }).then(async function (responseObject) {
             if (responseObject.success == true) {
-                alert("Удалено карту")
+                alert("Карту видалено")
                 push('/list/');
 
             } else if (responseObject.success == false) {
                 alert(responseObject.message)
             } else {
-                alert("Ошибка")
+                alert("Помилка")
             }
         })
     }

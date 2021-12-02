@@ -31,7 +31,7 @@ function CreateSpecies() {
                 push('/list_species/');
 
             } else {
-                alert("Ошибка")
+                alert("Помилка")
             }
         })
 

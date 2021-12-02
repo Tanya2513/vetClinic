@@ -16,7 +16,6 @@ import { UpdateSpeciesDto } from '../dto/update-species.dto';
 import { Species } from '../entities/species.entity';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { PatientService } from '../services/patient.service';
-import { ListPatientDto } from '../dto/list-patient.dto';
 
 @Controller('species')
 @UseGuards(JwtAuthGuard)
