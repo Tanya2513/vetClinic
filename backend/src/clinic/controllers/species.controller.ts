@@ -15,11 +15,16 @@ import { ListSpeciesDto } from '../dto/list-species.dto';
 import { UpdateSpeciesDto } from '../dto/update-species.dto';
 import { Species } from '../entities/species.entity';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { PatientService } from '../services/patient.service';
+import { ListPatientDto } from '../dto/list-patient.dto';
 
 @Controller('species')
 @UseGuards(JwtAuthGuard)
 export class SpeciesController {
-  constructor(private readonly speciesService: SpeciesService) {}
+  constructor(
+    private readonly speciesService: SpeciesService,
+    private readonly patientService: PatientService,
+  ) {}
 
   @Post()
   //Функция асинхронная
@@ -52,7 +57,8 @@ export class SpeciesController {
     @Param('id') id: string,
     @Body() updateSpeciesDto: UpdateSpeciesDto,
   ) {
-    const species = await this.speciesService.update(updateSpeciesDto);
+    console.log('put:id');
+    const species = await this.speciesService.update(id, updateSpeciesDto);
     if (species instanceof Species) {
       return {
         success: true,
@@ -66,6 +72,13 @@ export class SpeciesController {
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
+    const patients = await this.patientService.getList({ speciesId: id });
+    if (patients.length > 0) {
+      return {
+        success: false,
+        message: 'Не можливо видалити вид. За ним є закріплені паціенти.',
+      };
+    }
     const deleteResult = await this.speciesService.remove(id);
     if (deleteResult.affected == 1) {
       return {
