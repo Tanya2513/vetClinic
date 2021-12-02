@@ -27,7 +27,7 @@ function CreateSpecies() {
             body: data,
         }).then(async function(responseObject) {
             if (responseObject.success == true){
-                alert("Добавлено карту")
+                alert("Додано карту")
                 push('/list_species/');
 
             } else {

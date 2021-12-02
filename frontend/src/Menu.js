@@ -11,9 +11,11 @@ function Menu({refresh}) {
         push('/login');
     }
 
+
     let mainMenu = null;
-    if ('/login' === location.pathname) {
+    if ('/login' === location.pathname || !localStorage.jwt) {
         mainMenu = <>
+            <Nav.Link href="/login" onClick={refresh}>Вхід</Nav.Link>
         </>;
     } else {
         mainMenu =

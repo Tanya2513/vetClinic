@@ -30,9 +30,7 @@ export class PatientController {
   constructor(private readonly patientService: PatientService) {}
 
   @Post()
-  //Функция асинхронная
   async create(@Body() createPatientDto: CreatePatientDto) {
-    //Нужно подождать пока создастся перед тем как вывести created
     const patient = await this.patientService.create(createPatientDto);
     if (patient instanceof Patient) {
       return {
@@ -47,7 +45,6 @@ export class PatientController {
 
   @Get()
   async getList(@Query() query: ListPatientDto) {
-    console.log('query', query);
     return await this.patientService.getList(query);
   }
 
