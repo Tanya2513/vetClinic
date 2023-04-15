@@ -5,6 +5,7 @@ import {
 import {useEffect, useState} from "react";
 import fetcher from "../fetcher";
 import Button from "react-bootstrap/Button";
+import API_URL from "../constant";
 
 function CardSpecies() {
     let {id} = useParams();
@@ -18,14 +19,14 @@ function CardSpecies() {
     });
 
     useEffect(() => {
-        fetcher('http://localhost:5000/species/' + id).then(async (response) => {
+        fetcher(API_URL + '/species/' + id).then(async (response) => {
             setSpecies(response);
         })
     }, [id])
 
     function deleteCard() {
 
-        return fetcher('http://localhost:5000/species/' + id, {
+        return fetcher(API_URL + '/species/' + id, {
             method: 'DELETE',
         }).then(async function (responseObject) {
             if (responseObject.success == true) {

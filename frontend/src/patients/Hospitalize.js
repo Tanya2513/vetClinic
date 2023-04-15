@@ -4,6 +4,7 @@ import {useHistory, useParams} from "react-router-dom";
 import fetcher from "../fetcher";
 import {Col, Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import API_URL from "../constant";
 
 function HospitalizePatient(){
     let { id } = useParams();
@@ -23,7 +24,7 @@ function HospitalizePatient(){
             data.append(pair[0], pair[1]);
         }
 
-        return fetcher('http://localhost:5000/patient/hospitalize', {
+        return fetcher(API_URL + '/patient/hospitalize', {
             method: 'PUT',
             body: data,
         }).then(async function(responseObject) {

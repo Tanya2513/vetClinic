@@ -4,6 +4,7 @@ import {useHistory, useParams} from "react-router-dom";
 import fetcher from "../fetcher";
 import {Col, Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import API_URL from "../constant";
 
 //компонент
 function EditSpecies() {
@@ -20,7 +21,7 @@ function EditSpecies() {
     let { id } = useParams();
 
     useEffect(() => {
-        fetcher('http://localhost:5000/species/' + id).then(async (responseObject) => {
+        fetcher(API_URL + '/species/' + id).then(async (responseObject) => {
              setType(responseObject.type);
              setDescription(responseObject.description);
              setFeatures(responseObject.features);
@@ -38,7 +39,7 @@ function EditSpecies() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetcher('http://localhost:5000/species/' + id, {
+        return fetcher(API_URL + '/species/' + id, {
             method: 'PUT',
             body: data,
         }).then(async function (responseObject) {

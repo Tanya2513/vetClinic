@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import fetcher from "../fetcher";
 import {Col, Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import API_URL from "../constant";
 
 function CreateSpecies() {
     const [type, setType] = useState('');
@@ -22,7 +23,7 @@ function CreateSpecies() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetcher('http://localhost:5000/species/', {
+        return fetcher(API_URL + '/species/', {
             method: 'POST',
             body: data,
         }).then(async function(responseObject) {

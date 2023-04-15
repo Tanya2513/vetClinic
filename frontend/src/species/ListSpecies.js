@@ -3,6 +3,7 @@ import ListItemSpecies from './ListItemSpecies';
 import fetcher from "../fetcher";
 import ListItem from "../patients/ListItem";
 import {Table} from "react-bootstrap";
+import API_URL from "../constant";
 
 function ListSpecies() {
 
@@ -14,7 +15,7 @@ function ListSpecies() {
     //https://ru.reactjs.org/docs/hooks-reference.html#useeffect
     //выполнится при загрузке, потому что пустой deps
     useEffect(() => {
-        fetcher('http://localhost:5000/species').then(async (response) => {
+        fetcher(API_URL + '/species').then(async (response) => {
             setListSpecies(response);
         })
     }, [])

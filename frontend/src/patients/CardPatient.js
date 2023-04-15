@@ -5,6 +5,7 @@ import {
 import {useEffect, useState} from "react";
 import fetcher from "../fetcher";
 import Button from 'react-bootstrap/Button';
+import API_URL from "../constant";
 
 function CardPatient() {
     let {id} = useParams();
@@ -28,14 +29,14 @@ function CardPatient() {
     });
 
     useEffect(() => {
-        fetcher('http://localhost:5000/patient/' + id).then(async (response) => {
+        fetcher(API_URL + '/patient/' + id).then(async (response) => {
             setPatient(response);
         })
     }, [id])
 
     function deleteCard() {
 
-        return fetcher('http://localhost:5000/patient/' + id, {
+        return fetcher(API_URL + '/patient/' + id, {
             method: 'DELETE',
         }).then(async function (response) {
             if (response.success == true) {

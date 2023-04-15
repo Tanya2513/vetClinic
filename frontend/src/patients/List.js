@@ -4,6 +4,7 @@ import Input from "../form/Input";
 import fetcher from "../fetcher";
 import {Col, Form, Row, Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import API_URL from "../constant";
 
 function List({dateNow}) {
 
@@ -16,16 +17,17 @@ function List({dateNow}) {
     const [visitDate, setVisitDate] = useState('');
 
     console.log('dateNow', dateNow);
-    //https://ru.reactjs.org/docs/hooks-reference.html#useeffect
     useEffect(() => {
-        fetcher('http://localhost:5000/patient').then(async (response) => {
-            setList(await response);
+        fetcher(API_URL + '/patient').then(async (response) => {
+            const ttt  = await response;
+            console.log('ttt', ttt);
+            setList(ttt);
         })
     }, [dateNow])
 
 
     function search() {
-        let url = new URL('http://localhost:5000/patient');
+        let url = new URL(API_URL + '/patient');
         let filterId = speciesId;
         if(filterId === "все"){
             filterId = null
@@ -47,7 +49,7 @@ function List({dateNow}) {
 const[speciesList, setSpeciesList]=useState([]);
 
     useEffect(() => {
-        fetcher('http://localhost:5000/species').then(async (answer) => {
+        fetcher(API_URL + '/species').then(async (answer) => {
             answer.unshift({type: "все", description: "", id: null, features: ""});
             setSpeciesList(answer);
         })

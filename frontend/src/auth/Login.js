@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {Col, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import API_URL from "../constant";
 
 function Login() {
     const {push} = useHistory();
@@ -21,7 +22,7 @@ function Login() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetch('http://localhost:5000/auth/login', {
+        return fetch(API_URL + '/auth/login', {
             method: 'POST',
             body: data,
         }).then(async function (response) {

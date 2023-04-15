@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import fetcher from "../fetcher";
 import Button from "react-bootstrap/Button";
 import {Col, Form, Row} from "react-bootstrap";
+import API_URL from "../constant";
 
 function CreatePatient() {
     const [name, setName] = useState('');
@@ -34,7 +35,7 @@ function CreatePatient() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetcher('http://localhost:5000/patient/', {
+        return fetcher(API_URL + '/patient/', {
             method: 'POST',
             body: data,
         }).then(async function (response) {
@@ -52,7 +53,7 @@ function CreatePatient() {
     const [speciesList, setSpeciesList] = useState([]);
 
     useEffect(() => {
-        fetcher('http://localhost:5000/species').then(async (answer) => {
+        fetcher(API_URL + '/species').then(async (answer) => {
             setSpeciesList(answer);
             let firstElement = answer[0];
             setSpeciesId(firstElement.id);

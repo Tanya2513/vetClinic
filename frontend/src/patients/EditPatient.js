@@ -4,6 +4,7 @@ import {useHistory, useParams} from "react-router-dom";
 import fetcher from "../fetcher";
 import {Col, Form, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import API_URL from "../constant";
 
 //компонент
 function EditPatient() {
@@ -23,7 +24,7 @@ function EditPatient() {
     let { id } = useParams();
 
     useEffect(() => {
-        fetcher('http://localhost:5000/patient/' + id).then(async (response) => {
+        fetcher(API_URL + '/patient/' + id).then(async (response) => {
              const responseObject = response;
              setName(responseObject.name);
              setBirthDate(responseObject.birthDate);
@@ -53,7 +54,7 @@ function EditPatient() {
             data.append(pair[0], pair[1]);
         }
 
-        return fetcher('http://localhost:5000/patient/' + id, {
+        return fetcher(API_URL + '/patient/' + id, {
             method: 'PUT',
             body: data,
         }).then(async function (responseObject) {
@@ -72,7 +73,7 @@ function EditPatient() {
     const[speciesList, setSpeciesList]=useState([]);
 
     useEffect(() => {
-        fetcher('http://localhost:5000/species').then(async (response) => {
+        fetcher(API_URL + '/species').then(async (response) => {
             setSpeciesList(response);
         })
     }, [])
